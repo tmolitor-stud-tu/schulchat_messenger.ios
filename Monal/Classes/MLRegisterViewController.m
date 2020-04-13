@@ -127,7 +127,7 @@
                 NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
                 [dic setObject:kRegServer forKey:kDomain];
                 [dic setObject:self.jid.text forKey:kUsername];
-                [dic setObject:[EncodingTools encodeRandomResource] forKey:kResource];
+                [dic setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString]  forKey:kResource];
                 [dic setObject:@YES forKey:kSSL];
                 [dic setObject:@YES forKey:kEnabled];
                 [dic setObject:@NO forKey:kSelfSigned];

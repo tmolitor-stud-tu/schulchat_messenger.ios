@@ -6,7 +6,10 @@
 //
 //
 
+#include "../local/secrets.h"
+#import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonCrypto.h>
+#import <CommonCrypto/CommonHMAC.h>
 #import <CFNetwork/CFSocketStream.h>
 #import <Security/SecureTransport.h>
 
@@ -1397,39 +1400,37 @@ NSString *const kXMPPPresence = @"presence";
 
                 else {
                     //look at menchanisms presented
-
-                    if (streamNode.SASLPlain)
+                    if(streamNode.SASLKWO)
+                    {
+                        MLXMLNode* saslXML = [[MLXMLNode alloc] init];
+                        saslXML.element = @"auth";
+                        [saslXML.attributes setObject: @"urn:ietf:params:xml:ns:xmpp-sasl" forKey: kXMLNS];
+                        [saslXML.attributes setObject: @"KWO" forKey: @"mechanism"];
+                        
+                        saslXML.data=[EncodingTools encodeBase64WithString: self.connectionProperties.identity.user];
+                        [self send:saslXML];
+                    }
+                    else if(streamNode.SASLPlain)
                     {
                         NSString* saslplain=[EncodingTools encodeBase64WithString: [NSString stringWithFormat:@"\0%@\0%@",  self.connectionProperties.identity.user, self.connectionProperties.identity.password ]];
-
+                        
                         MLXMLNode* saslXML= [[MLXMLNode alloc]init];
                         saslXML.element=@"auth";
                         [saslXML.attributes setObject: @"urn:ietf:params:xml:ns:xmpp-sasl"  forKey:kXMLNS];
                         [saslXML.attributes setObject: @"PLAIN"forKey: @"mechanism"];
-
+                        
                         saslXML.data=saslplain;
                         [self send:saslXML];
                     }
                     else
-                        if(streamNode.SASLDIGEST_MD5)
-                        {
-                            MLXMLNode* saslXML= [[MLXMLNode alloc]init];
-                            saslXML.element=@"auth";
-                            [saslXML.attributes setObject: @"urn:ietf:params:xml:ns:xmpp-sasl"  forKey:kXMLNS];
-                            [saslXML.attributes setObject: @"DIGEST-MD5"forKey: @"mechanism"];
-
-                            [self send:saslXML];
-                        }
-                        else
-                        {
-
-                            //no supported auth mechanism try legacy
-                            //[self disconnect];
-                            DDLogInfo(@"no auth mechanism. will try legacy auth");
-                            XMPPIQ* iqNode =[[XMPPIQ alloc] initWithElement:@"iq"];
-                            [iqNode getAuthwithUserName:self.connectionProperties.identity.user ];
-                            [self send:iqNode];
-                        }
+                    {
+                        //no supported auth mechanism try legacy
+                        //[self disconnect];
+                        DDLogInfo(@"no auth mechanism. will try legacy auth");
+                        XMPPIQ* iqNode =[[XMPPIQ alloc] initWithElement:@"iq"];
+                        [iqNode getAuthwithUserName:self.connectionProperties.identity.user ];
+                        [self send:iqNode];
+                    }
                 }
             }
         }
@@ -1630,98 +1631,28 @@ NSString *const kXMPPPresence = @"presence";
         ParseChallenge* challengeNode= parsedStanza;
         if(challengeNode.saslChallenge)
         {
-            MLXMLNode* responseXML= [[MLXMLNode alloc]init];
-            responseXML.element=@"response";
-            [responseXML.attributes setObject: @"urn:ietf:params:xml:ns:xmpp-sasl"  forKey:kXMLNS];
-
-            NSString* decoded=[[NSString alloc]  initWithData: (NSData*)[EncodingTools dataWithBase64EncodedString:challengeNode.challengeText] encoding:NSASCIIStringEncoding];
-            DDLogVerbose(@"decoded challenge to %@", decoded);
-            NSArray* parts =[decoded componentsSeparatedByString:@","];
-
-            if([parts count]<2)
-            {
-                //this is a success message  from challenge
-
-                NSArray* rspparts= [[parts objectAtIndex:0] componentsSeparatedByString:@"="];
-                if([[rspparts objectAtIndex:0] isEqualToString:@"rspauth"])
-                {
-                    DDLogVerbose(@"digest-md5 success");
-
-                }
-            }
-            else{
-
-                NSString* realm;
-                NSString* nonce;
-
-                for(NSString* part in parts)
-                {
-                    NSArray* split = [part componentsSeparatedByString:@"="];
-                    if([split count]>1)
-                    {
-                        if([split[0] isEqualToString:@"realm"]) {
-                            realm=[split[1]  substringWithRange:NSMakeRange(1, [split[1]  length]-2)] ;
-                        }
-
-                        if([split[0] isEqualToString:@"nonce"]) {
-                            nonce=[split[1]  substringWithRange:NSMakeRange(1, [split[1]  length]-2)] ;
-                        }
-                    }
-                }
-
-                if(!realm) realm=@"";
-
-                NSData* cnonce_Data=[EncodingTools MD5: [NSString stringWithFormat:@"%d",arc4random()%100000]];
-                NSString* cnonce =[EncodingTools hexadecimalString:cnonce_Data];
-
-                // ****** digest stuff going on here...
-                NSString* X= [NSString stringWithFormat:@"%@:%@:%@", self.connectionProperties.identity.user, realm,  self.connectionProperties.identity.password ];
-                DDLogVerbose(@"X: %@", X);
-
-                NSData* Y = [EncodingTools MD5:X];
-
-                //  if you have the authzid  here you need it below too but it wont work on som servers
-                // so best not include it
-
-                NSString* A1Str=[NSString stringWithFormat:@":%@:%@",
-                                 nonce,cnonce];
-                NSData* A1= [A1Str
-                             dataUsingEncoding:NSUTF8StringEncoding];
-
-                NSMutableData *HA1data = [NSMutableData dataWithCapacity:([Y length] + [A1 length])];
-                [HA1data appendData:Y];
-                [HA1data appendData:A1];
-                DDLogVerbose(@" HA1data : %@",HA1data  );
-
-                NSData* HA1=[EncodingTools DataMD5:HA1data];
-
-                NSString* A2=[NSString stringWithFormat:@"AUTHENTICATE:xmpp/%@", realm];
-                DDLogVerbose(@"%@", A2);
-                NSData* HA2=[EncodingTools MD5:A2];
-
-                NSString* KD=[NSString stringWithFormat:@"%@:%@:00000001:%@:auth:%@",
-                              [EncodingTools hexadecimalString:HA1], nonce,
-                              cnonce,
-                              [EncodingTools hexadecimalString:HA2]];
-
-                DDLogVerbose(@" KD: %@", KD );
-                NSData* responseData=[EncodingTools MD5:KD];
-                // above this is ok
-                NSString* response=[NSString stringWithFormat:@"username=\"%@\",realm=\"%@\",nonce=\"%@\",cnonce=\"%@\",nc=00000001,qop=auth,digest-uri=\"xmpp/%@\",response=%@,charset=utf-8",
-                                    self.connectionProperties.identity.user,realm, nonce, cnonce, realm, [EncodingTools hexadecimalString:responseData]];
-                //,authzid=\"%@@%@/%@\"  ,account,domain, resource
-
-                DDLogVerbose(@"  response :  %@", response);
-                NSString* encoded=[EncodingTools encodeBase64WithString:response];
-
-                //                NSString* xmppcmd = [NSString stringWithFormat:@"<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%@</response>", encoded]
-                //                [self talk:xmppcmd];
-
-                responseXML.data=encoded;
-            }
-
+            NSString* challenge = [[NSString alloc] initWithData:(NSData*)[EncodingTools dataWithBase64EncodedString:challengeNode.challengeText] encoding:NSASCIIStringEncoding];
+            DDLogVerbose(@"decoded challenge to %@", challenge);
+            
+            MLXMLNode* responseXML = [[MLXMLNode alloc] init];
+            responseXML.element = @"response";
+            [responseXML.attributes setObject:@"urn:ietf:params:xml:ns:xmpp-sasl" forKey:kXMLNS];
+            
+            //gather and build plaintext data string
+            NSString* deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            //NSString* deviceName = [NSString stringWithFormat:@"%@ (%@)", [[UIDevice currentDevice] name], [[UIDevice currentDevice] localizedModel]];
+            NSString* deviceName = [[UIDevice currentDevice] name];
+            NSString* versionCode = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+            NSString* plaintextData = [NSString stringWithFormat:@"%@|%@|%@|%@", deviceID, deviceName, versionCode, @"ios"];
+            
+            //calculate hmac signatures
+            NSString* firstHMAC = [self hmacForKey:self.connectionProperties.identity.password andData:plaintextData];
+            NSString* secondHMAC = [self hmacForKey:APP_SECRET andData:firstHMAC];
+            NSString* finalHMAC = [self hmacForKey:challenge andData:secondHMAC];
+            
+            //send response containing plaintext data and signature
+            responseXML.data = [EncodingTools encodeBase64WithString: [NSString stringWithFormat:@"%@|%@", plaintextData, finalHMAC]];
             [self send:responseXML];
-            return;
         }
     }
     else  if([parsedStanza.stanzaType isEqualToString:@"success"] && [parsedStanza isKindOfClass:[ParseStream class]])
@@ -3240,4 +3171,17 @@ static NSMutableArray *extracted(xmpp *object) {
 #endif
 }
 
+-(NSString*) hmacForKey: (NSString*) key andData: (NSString*) data
+{
+	//DDLogVerbose(@"hmacForKey: %@ andData: %@", key, data);
+	const char* cKey  = [key cStringUsingEncoding: NSUTF8StringEncoding];
+	const char* cData = [data cStringUsingEncoding: NSUTF8StringEncoding];
+	uint8_t cHMAC[CC_SHA256_DIGEST_LENGTH] = {0};
+	CCHmac(kCCHmacAlgSHA256, cKey, [key lengthOfBytesUsingEncoding: NSUTF8StringEncoding], cData, [data lengthOfBytesUsingEncoding: NSUTF8StringEncoding], cHMAC);
+	NSString* retval = [EncodingTools hexadecimalString: [[NSData alloc] initWithBytes: cHMAC length: sizeof(cHMAC)]];
+	//DDLogVerbose(@"hmacForKey --> %@", retval);
+	return retval;
+}
+
 @end
+

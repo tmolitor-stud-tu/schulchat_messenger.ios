@@ -120,8 +120,8 @@
     {
         self.port=@"5222";
         self.useSSL=true;
-        self.resource=[EncodingTools encodeRandomResource];
-        self.directTLS=NO;
+        self.resource=[[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        self.oldStyleSSL=NO;
         self.selfSignedSSL=NO;
     }
     
@@ -197,8 +197,7 @@
         [dic setObject:self.port forKey:kPort];
     }
     
-    [dic setObject:self.resource forKey:kResource];
-
+    [dic setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:kResource];
     [dic setObject:[NSNumber numberWithBool:self.useSSL] forKey:kSSL];
     [dic setObject:[NSNumber numberWithBool:self.enabled] forKey:kEnabled];
     [dic setObject:[NSNumber numberWithBool:self.selfSignedSSL] forKey:kSelfSigned];

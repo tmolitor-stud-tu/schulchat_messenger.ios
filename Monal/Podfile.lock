@@ -50,16 +50,19 @@ DEPENDENCIES:
   - TPCircularBuffer
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - CocoaLumberjack
+    - Crashlytics
     - DACircularProgress
     - DZNEmptyDataSet
     - EAIntroView
     - EARestrictedScrollView
+    - Fabric
     - IDMPhotoBrowser
     - MarqueeLabel
     - MBProgressHUD
     - NotificationBannerSwift
+    - OpenSSL-Universal
     - pop
     - SAMKeychain
     - SDWebImage
@@ -67,10 +70,6 @@ SPEC REPOS:
     - SignalProtocolObjC
     - SnapKit
     - TPCircularBuffer
-  trunk:
-    - Crashlytics
-    - Fabric
-    - OpenSSL-Universal
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
@@ -95,4 +94,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2378f510e2ce63ac9dd9e3c07b4bec4ef3043577
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

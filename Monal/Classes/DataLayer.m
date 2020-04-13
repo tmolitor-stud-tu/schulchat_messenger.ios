@@ -2536,9 +2536,9 @@ NSString *const kCount = @"count";
 
     if([dbversion doubleValue] < 2.3)
     {
-        DDLogVerbose(@"Database version <2.3 detected. Performing upgrade.");
+        DDLogVerbose(@"Database version <2.3 detected. Performing upgrade . ");
 
-        NSString* resourceQuery = [NSString stringWithFormat:@"update account set resource='%@';", [EncodingTools encodeRandomResource]];
+        NSString* resourceQuery = [NSString stringWithFormat:@"update account set resource='%@';", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 
         [self executeNonQuery:resourceQuery withCompletion:nil];
         [self executeNonQuery:@"update dbversion set dbversion='2.3';" withCompletion:nil];

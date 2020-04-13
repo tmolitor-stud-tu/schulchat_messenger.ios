@@ -141,17 +141,17 @@
 			_SASLPlain=YES;
 		}
 		
-		if([_messageBuffer isEqualToString:@"CRAM-MD5"])
-		{
-			DDLogVerbose(@"SASL CRAM-MD5 is supported");
-			_SASLCRAM_MD5=YES;
-		}
-		
-		if([_messageBuffer isEqualToString:@"DIGEST-MD5"])
-		{
-			DDLogVerbose(@"SASL DIGEST-MD5 is supported");
-			_SASLDIGEST_MD5=YES;
-		}
+        if([_messageBuffer isEqualToString:@"X-OAUTH2"])
+        {
+            DDLogVerbose(@"SASL X-OAUTH2 is supported");
+            _SASLX_OAUTH2=YES;
+        }
+        
+        if([_messageBuffer isEqualToString:@"KWO"])
+        {
+            DDLogVerbose(@"SASL KWO is supported");
+            _SASLKWO=YES;
+        }
         
         _messageBuffer=nil; 
 		return;
