@@ -7,3 +7,6 @@ Monal/Monal.xcodeproj/xcuserdata/anurodhp.xcuserdatad/xcschemes/Monal.xcscheme
 Monal/Monal.xcodeproj/xcuserdata/anurodhp.xcuserdatad/xcschemes/jrtplib-static.xcscheme
 Monal/Monal.xcodeproj/xcuserdata/anurodhp.xcuserdatad/xcschemes/xcschememanagement.plist
 contents.xcworkspacedata
+
+# local secrets
+/Monal/local
