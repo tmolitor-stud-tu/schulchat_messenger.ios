@@ -16,11 +16,6 @@
 #import "MLImageManager.h"
 #import "ActiveChatsViewController.h"
 
-#if !TARGET_OS_MACCATALYST
-@import Crashlytics;
-@import Fabric;
-#endif
-
 @import NotificationBannerSwift;
 
 #import "MLXMPPManager.h"
@@ -188,7 +183,7 @@
         
         UIMutableUserNotificationAction *replyAction = [[UIMutableUserNotificationAction alloc] init];
         replyAction.activationMode = UIUserNotificationActivationModeBackground;
-        replyAction.title = @"Reply";
+        replyAction.title = @"Antworten";
         replyAction.identifier = @"ReplyButton";
         replyAction.destructive = NO;
         replyAction.authenticationRequired = NO;
@@ -237,13 +232,6 @@
 
     // should any accounts connect?
     [[MLXMPPManager sharedInstance] connectIfNecessary];
-    
-#if !TARGET_OS_MACCATALYST
-    BOOL optout = [[NSUserDefaults standardUserDefaults] boolForKey:@"CrashlyticsOptOut"];
-    if(!optout) {
-        [Fabric with:@[[Crashlytics class]]];
-    }
-#endif
     
     //update logs if needed
     if(! [[NSUserDefaults standardUserDefaults] boolForKey:@"Logging"])
@@ -482,13 +470,13 @@
     if (@available(iOS 13.0, *)) {
         
         //monal
-        UIKeyCommand *preferencesCommand = [UIKeyCommand commandWithTitle:@"Preferences..." image:nil action:@selector(showSettings) input:@"," modifierFlags:UIKeyModifierCommand propertyList:nil];
+        UIKeyCommand *preferencesCommand = [UIKeyCommand commandWithTitle:@"Einstellungen..." image:nil action:@selector(showSettings) input:@"," modifierFlags:UIKeyModifierCommand propertyList:nil];
         
         UIMenu * preferencesMenu = [UIMenu menuWithTitle:@"" image:nil identifier:@"im.monal.preferences" options:UIMenuOptionsDisplayInline children:@[preferencesCommand]];
         [builder insertSiblingMenu:preferencesMenu afterMenuForIdentifier:UIMenuAbout];
         
         //file
-        UIKeyCommand *newCommand = [UIKeyCommand commandWithTitle:@"New Message" image:nil action:@selector(showNew) input:@"N" modifierFlags:UIKeyModifierCommand propertyList:nil];
+        UIKeyCommand *newCommand = [UIKeyCommand commandWithTitle:@"Neue Nachricht" image:nil action:@selector(showNew) input:@"N" modifierFlags:UIKeyModifierCommand propertyList:nil];
  
         UIMenu *newMenu = [UIMenu menuWithTitle:@"" image:nil identifier:@"im.monal.new" options:UIMenuOptionsDisplayInline children:@[newCommand]];
         [builder insertChildMenu:newMenu atStartOfMenuForIdentifier:UIMenuFile];
@@ -499,7 +487,7 @@
         [builder insertSiblingMenu:detailsMenu afterMenuForIdentifier:@"im.monal.new"];
         
         
-       UIKeyCommand *deleteCommand = [UIKeyCommand commandWithTitle:@"Delete Conversation" image:nil action:@selector(deleteConversation) input:@"\b" modifierFlags:UIKeyModifierCommand propertyList:nil];
+       UIKeyCommand *deleteCommand = [UIKeyCommand commandWithTitle:@"Unterhaltung beenden" image:nil action:@selector(deleteConversation) input:@"\b" modifierFlags:UIKeyModifierCommand propertyList:nil];
         
         UIMenu *deleteMenu = [UIMenu menuWithTitle:@"" image:nil identifier:@"im.monal.delete" options:UIMenuOptionsDisplayInline children:@[deleteCommand]];
         [builder insertSiblingMenu:deleteMenu afterMenuForIdentifier:@"im.monal.detail"];

@@ -29,7 +29,7 @@
     if([[MLXMPPManager sharedInstance].connectedXMPP count]==0)
     {
         UIAlertController *messageAlert =[UIAlertController alertControllerWithTitle:@"No connected accounts" message:@"Please make sure at least one account has connected before trying to message someone." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
         }];
         [messageAlert addAction:closeAction];
@@ -41,7 +41,7 @@
         if(self.message.text.length==0)
         {
             UIAlertController *messageAlert =[UIAlertController alertControllerWithTitle:@"Error" message:@"Message can't be empty" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 
             }];
             [messageAlert addAction:closeAction];
@@ -86,7 +86,7 @@
         else
         {
             UIAlertController *messageAlert =[UIAlertController alertControllerWithTitle:@"Error" message:@"Recipient name can't be empty" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 
             }];
             [messageAlert addAction:closeAction];

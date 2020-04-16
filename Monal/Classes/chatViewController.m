@@ -234,7 +234,7 @@
     
     [self updateBackground];
     
-    self.placeHolderText.text=[NSString stringWithFormat:@"Message from %@", self.jid];
+    self.placeHolderText.text=[NSString stringWithFormat:@"Nachricht schreiben"];
     // Load message draft from db
     [[DataLayer sharedInstance] loadMessageDraft:self.contact.contactJid forAccount:self.contact.accountId
         withCompletion:^(NSString* messageDraft) {
@@ -381,7 +381,7 @@
           if(!self.jid) return;
           MLMessage *unreadStatus = [[MLMessage alloc] init];
           unreadStatus.messageType=kMessageTypeStatus;
-          unreadStatus.messageText=@"Unread Messages Below";
+          unreadStatus.messageText=@"Beginn der ungelesenen Nachrichten";
           unreadStatus.actualFrom=self.jid;
           
           NSInteger unreadPos = newList.count-1;
@@ -627,7 +627,7 @@
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                        message:@"This server does not appear to support HTTP file uploads (XEP-0363). Please ask the administrator to enable it." preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -709,8 +709,8 @@
     if(!self.uploadHUD) {
         self.uploadHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.uploadHUD.removeFromSuperViewOnHide=YES;
-        self.uploadHUD.label.text =@"Uploading";
-        self.uploadHUD.detailsLabel.text =@"Uploading file to server";
+        self.uploadHUD.label.text =@"Senden";
+        self.uploadHUD.detailsLabel.text =@"Sende Datei";
         
     }
     NSData *decryptedData= data;
@@ -766,8 +766,8 @@
                 
             }
             else  {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"There was an error uploading the file to the server" message:[NSString stringWithFormat:@"%@", error.localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Beim Senden der Datei ist ein Fehler aufgetreten" message:[NSString stringWithFormat:@"%@", error.localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [alert dismissViewControllerAnimated:YES completion:nil];
                 }]];
                 [self presentViewController:alert animated:YES completion:nil];
@@ -875,11 +875,11 @@
         NSString* messageString = [NSString  stringWithFormat:NSLocalizedString(@"You have been invited to a conversation %@?", nil), from ];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Group Chat Invite" message:messageString preferredStyle:UIAlertControllerStyleAlert];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"Join" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Beitreten" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [xmppAccount joinRoom:from withNick:xmppAccount.connectionProperties.identity.user andPassword:nil];
             [alert dismissViewControllerAnimated:YES completion:nil];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -1137,7 +1137,7 @@
 {
     NSInteger historyId = ((UIButton*) sender).tag;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Retry sending message?" message:@"This message failed to send." preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nachricht erneut senden?" message:@"Diese Nacricht konnte nicht gesendet werden." preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSArray *messageArray =[[DataLayer sharedInstance] messageForHistoryID:historyId];
         if([messageArray count]>0) {
@@ -1146,7 +1146,7 @@
             [self setMessageId:[dic objectForKey:@"messageid"] delivered:YES]; // for the UI, db will be set in the notification
         }
     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    [alert addAction:[UIAlertAction actionWithTitle:@"Abbrechen" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
     alert.popoverPresentationController.sourceView=sender;
@@ -1464,7 +1464,7 @@
     
     if(!row.hasBeenReceived) {
         if(row.errorType.length>0) {
-            cell.messageStatus.text =[NSString stringWithFormat:@"Error:%@ - %@", row.errorType, row.errorReason];
+            cell.messageStatus.text =[NSString stringWithFormat:@"Fehler: %@ - %@", row.errorType, row.errorReason];
             cell.messageStatus.hidden=NO;
         }
     }
@@ -1496,7 +1496,7 @@
                 IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:self.photos];
                 browser.delegate=self;
                
-                UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closePhotos)];
+                UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Schließen" style:UIBarButtonItemStyleDone target:self action:@selector(closePhotos)];
                 browser.navigationItem.rightBarButtonItem=close;
                 
                 //                browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)

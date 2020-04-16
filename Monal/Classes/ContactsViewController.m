@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title=NSLocalizedString(@"Contacts",@"");
+    self.navigationItem.title=NSLocalizedString(@"Kontakte",@"");
     
     self.contactsTable=self.tableView;
     self.contactsTable.delegate=self;
@@ -171,6 +171,7 @@
         }];
     }
     
+    /*
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"OfflineContact"])
     {
         [[DataLayer sharedInstance] offlineContactsWithCompletion:^(NSMutableArray *results) {
@@ -180,6 +181,7 @@
             });
         }];
     }
+    */
     
     if(self.searchResults.count==0)
     {
@@ -244,11 +246,13 @@
     NSString* toReturn=nil;
     switch (section) {
         case konlineSection:
-            toReturn= NSLocalizedString(@"Recently Seen", "");
+            toReturn= NSLocalizedString(@"Alle Kontakte", "");
             break;
+		/*
         case kofflineSection:
             toReturn= NSLocalizedString(@"Away", "");
             break;
+		*/
         default:
             break;
     }
@@ -339,9 +343,11 @@
         toreturn =1;
     }
     else{
+		/*
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"OfflineContact"])
             toreturn =3;
         else
+		*/
             toreturn =2;
     }
     return toreturn;
@@ -416,6 +422,7 @@
     }
     
     if(tableView ==self.view) {
+		/*
         if(indexPath.section==konlineSection)
         {
             NSString* stateString=[row.state stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
@@ -434,8 +441,12 @@
         else  if(indexPath.section==kofflineSection) {
             cell.status=kStatusOffline;
         }}
+        */
+		cell.status=kStatusOnline;
+	}
     else {
         
+		/*
         if(row.isOnline==YES)
         {
             cell.status=kStatusOnline;
@@ -444,6 +455,8 @@
         {
             cell.status=kStatusOffline;
         }
+        */
+		cell.status=kStatusOnline;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
@@ -487,6 +500,8 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	return NO;
+	
     if(tableView ==self.view) {
         return YES;
     }
@@ -509,6 +524,8 @@
 
 -(void) deleteRowAtIndexPath:(NSIndexPath *) indexPath
 {
+	return;
+	
     MLContact* contact;
     if ((indexPath.section==1) && (indexPath.row<=[self.contacts count]) ) {
         contact=[self.contacts objectAtIndex:indexPath.row];
@@ -634,7 +651,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"You need friends for this ride";
+    NSString *text = @"Sie sind bislang der einzige Nutzer an dieser Schule";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -644,7 +661,7 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"Add new contacts with the + button above. Your friends will pop up here when they can talk";
+    NSString *text = @"Bitte warten Sie, bis andere Nutzer die App auch installiert haben. Diese Nuzer werden dann automatisch hier auftauchen.";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;

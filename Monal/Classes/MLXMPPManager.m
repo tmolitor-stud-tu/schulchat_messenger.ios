@@ -105,6 +105,10 @@ An array of Dics what have timers to make sure everything was sent
         [[NSUserDefaults standardUserDefaults] setBool:YES  forKey: @"ShowGeoLocation"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
+    //make sure this is never shown for kwo messenger
+    [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"HasSeenIntro"];
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasSeeniOS13Message"];
 }
 
 + (MLXMPPManager* )sharedInstance

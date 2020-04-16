@@ -59,7 +59,7 @@
     if(self.contact.isGroup) {
        NSArray *members= [[DataLayer sharedInstance] resourcesForContact:self.contact.contactJid];
         self.groupMemberCount=members.count;
-        self.navigationItem.title =@"Group Chat";
+        self.navigationItem.title =@"Gruppe";
         
     }
     
@@ -186,6 +186,9 @@
                 [detailCell.lockButton setImage:[UIImage imageNamed:@"745-unlocked"] forState:UIControlStateNormal];
             }
             
+            detailCell.phoneButton.hidden=YES;
+			detailCell.lockButton.hidden=YES;
+			
             thecell=detailCell;
             break;
         }
@@ -207,6 +210,7 @@
                     cell.textInput.placeholder=@"Set a nickname";
                     cell.textInput.delegate=self;
                 }
+                cell.textInput.enabled=NO;
                 thecell=cell;
             }
             else if(indexPath.row==1) {
@@ -221,7 +225,7 @@
             }
             else {
                 UITableViewCell *cell=  (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"TableCell"];
-                cell.textLabel.text = @"View Images Received";
+                cell.textLabel.text = @"Empfangene Bilder anzeigen";
                 thecell=cell;
             }
             break;
@@ -267,14 +271,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString* toreturn=nil;
     if(section==1)
-        toreturn= @"About";
+        toreturn= @"Kontaktdetails";
     
     if(section==2)
         toreturn= @"Connection Details";
@@ -401,7 +405,7 @@
             self.rightImage=[UIImage imageNamed:@"IDMPhotoBrowser_arrowRight"];
             browser.leftArrowImage =self.leftImage;
             browser.rightArrowImage =self.rightImage;
-            UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closePhotos)];
+            UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Schließen" style:UIBarButtonItemStyleDone target:self action:@selector(closePhotos)];
                           browser.navigationItem.rightBarButtonItem=close;
             
             UINavigationController *nav =[[UINavigationController alloc] initWithRootViewController:browser];
@@ -409,8 +413,8 @@
             
             [self presentViewController:nav animated:YES completion:nil];
         } else  {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nothing to see" message:@"You have not received any images in this conversation." preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nichts zu sehen" message:@"Sie haben noch keine Bilder in dieser Konversations empfangen." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }]];
             [self presentViewController:alert animated:YES completion:nil];
@@ -469,7 +473,7 @@
         
     } else  {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Encryption Not Supported" message:@"This contact does not appear to have any devices that support encryption." preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
         }]];
         [self presentViewController:alert animated:YES completion:nil];

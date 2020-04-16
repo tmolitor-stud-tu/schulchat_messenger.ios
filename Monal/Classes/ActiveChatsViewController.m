@@ -222,9 +222,15 @@
         [self refreshDisplay];
     }
   
+	/*
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"HasSeenIntro"]) {
         [self performSegueWithIdentifier:@"showIntro" sender:self];
     }
+    */
+	if([[MLXMPPManager sharedInstance].connectedXMPP count]==0)
+	{
+		[self performSegueWithIdentifier:@"showLogin" sender:self];
+	}
     else  {
         //for 3->4 release remove later
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"HasSeeniOS13Message"]) {
@@ -345,6 +351,7 @@
     
     NSString *state= [row.state  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+	/*
     if(([state isEqualToString:@"away"]) ||
        ([state isEqualToString:@"dnd"])||
        ([state isEqualToString:@"xa"])
@@ -358,6 +365,8 @@
     else if([state isEqualToString:@"(null)"] || [state isEqualToString:@""]) {
         cell.status=kStatusOnline;
     }
+    */
+	cell.status=kStatusOnline;
     
     cell.accountNo=row.accountId.integerValue;
     cell.username=row.contactJid;
@@ -376,16 +385,16 @@
                 MLMessage *messageRow = messages[0];
                 if([messageRow.messageType isEqualToString:kMessageTypeUrl])
                 {
-                    [cell showStatusText:@"🔗 A Link"];
+                    [cell showStatusText:@"🔗 Ein Link"];
                 } else if([messageRow.messageType isEqualToString:kMessageTypeImage])
                 {
-                    [cell showStatusText:@"📷 An Image"];
+                    [cell showStatusText:@"📷 Ein Bild"];
                 } else if ([messageRow.messageType isEqualToString:kMessageTypeMessageDraft]) {
-                    NSString* draftPreview = [NSString stringWithFormat:@"Draft: %@", messageRow.messageText];
+                    NSString* draftPreview = [NSString stringWithFormat:@"Entwurf: %@", messageRow.messageText];
                     [cell showStatusTextItalic:draftPreview withItalicRange:NSMakeRange(0, 6)];
                 } else if([messageRow.messageType isEqualToString:kMessageTypeGeo])
                 {
-                    [cell showStatusText:@"📍 A Location"];
+                    [cell showStatusText:@"📍 Ein Standort"];
                 } else  {
                     [cell showStatusText:messageRow.messageText];
                 }
@@ -398,7 +407,7 @@
                 }
             } else  {
                 [cell showStatusText:nil];
-                DDLogWarn(@"Active chat but no messages found in history for %@.", row.contactJid);
+                DDLogWarn(@"Kein Verlauf für die Unterhaltung mit %@ gefunden.", row.contactDisplayName);
             }
             
         });
@@ -422,7 +431,7 @@
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"Hide Chat";
+    return @"Unterhaltung beenden";
 }
 
 
@@ -474,7 +483,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"No one is here";
+    NSString *text = @"Keine aktiven Chats vorhanden";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -484,7 +493,7 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"When you start talking to someone,\n they will show up here.";
+    NSString *text = @"Sobald Sie eine Unterhaltung mit einem Ihrer Kontakte beginnen, wird diese Unterhaltung hier erscheinen.";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;

@@ -99,7 +99,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="New" id="Msw-bP-HIu">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="IGd-kM-9BO">
+                        <barButtonItem key="rightBarButtonItem" title="Schließen" id="IGd-kM-9BO">
                             <connections>
                                 <action selector="close:" destination="NFY-nW-WDm" id="UTN-eO-MHz"/>
                             </connections>
@@ -216,16 +216,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="qsR-dX-TO1">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="NyY-WQ-3hC">
+                        <barButtonItem key="leftBarButtonItem" title="Schließen" id="NyY-WQ-3hC">
                             <connections>
                                 <action selector="close:" destination="6Ao-6z-tB7" id="JZL-x6-OVB"/>
                             </connections>
                         </barButtonItem>
+					<!--
                         <barButtonItem key="rightBarButtonItem" image="person.3.fill" catalog="system" id="2vX-Wb-Pa6">
                             <connections>
                                 <segue destination="nW7-fq-iEr" kind="show" identifier="showGroups" id="U4S-rm-QvZ"/>
                             </connections>
-                        </barButtonItem>
+						</barButtonItem>
+					-->
                     </navigationItem>
                     <connections>
                         <outlet property="view" destination="4Ri-hX-ob8" id="nLc-h6-Jwi"/>
@@ -359,18 +361,20 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Compose" image="square.and.pencil" catalog="system" id="pyP-qb-mfr">
+                            <barButtonItem title="Kontakte" image="person.2.fill" catalog="system" id="pyP-qb-mfr">
                                 <connections>
                                     <segue destination="hMh-kj-2DY" kind="popoverPresentation" identifier="showContacts" popoverAnchorBarButtonItem="pyP-qb-mfr" id="lBM-pO-Hdw">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
                             </barButtonItem>
+							<!--
                             <barButtonItem title="Add" image="plus" catalog="system" id="wNA-vF-ohQ">
                                 <connections>
                                     <segue destination="elF-QS-Bpm" kind="presentation" identifier="showNew" id="tor-VM-YxS"/>
                                 </connections>
                             </barButtonItem>
+							-->
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1105,7 +1109,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="rLX-lr-DcJ" secondAttribute="bottom" id="tWm-3h-e4h"/>
                                                     </constraints>
                                                 </view>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM6-k0-MKY">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zugestellt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM6-k0-MKY">
                                                     <rect key="frame" x="271.66666666666669" y="104" width="45.666666666666686" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -1256,7 +1260,7 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAj-sV-yOx">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zugestellt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAj-sV-yOx">
                                                     <rect key="frame" x="89.333333333333329" y="209" width="45.666666666666671" height="11"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45.670000000000002" id="X3r-pm-QfD"/>
@@ -1325,7 +1329,7 @@
                                                     <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="724-info"/>
                                                 </button>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-4V-7mE">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zugestellt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C4-4V-7mE">
                                                     <rect key="frame" x="70" y="232" width="46" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -1417,7 +1421,7 @@
                                                     <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="724-info"/>
                                                 </button>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BY7-In-qxm">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zugestellt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BY7-In-qxm">
                                                     <rect key="frame" x="70" y="232" width="46" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -1670,7 +1674,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Send A Message " id="MiR-iW-O6e">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="Vtv-sv-ErG">
+                        <barButtonItem key="rightBarButtonItem" title="Schließen" id="Vtv-sv-ErG">
                             <connections>
                                 <action selector="close:" destination="WjA-je-Xez" id="PuF-5l-APQ"/>
                             </connections>
@@ -1697,6 +1701,7 @@
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="paperplane.fill" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="person.2.fill" catalog="system" width="128" height="61"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>

@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"Sounds";
+    self.title=@"Klänge";
     
     self.soundList = @[@"Morse",
                        @"Xylophone",
@@ -61,7 +61,7 @@
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if(section==1){
-        return @"Select sounds that are played with new message notificaitons. Default is Xylophone.";
+        return @"Wählen Sie aus, welcher Klang bei der Benachrichtigung über neue Nachrichten abgespielt werden soll. Die Standardeinstellung ist Xylophone.";
     } else return nil;
 }
 
@@ -81,7 +81,7 @@
             cell.parent= self;
             cell.switchEnabled=YES;
             cell.defaultKey=@"Sound";
-            cell.textLabel.text=@"Play Sounds";
+            cell.textLabel.text=@"Benachrichtigungsklänge abspielen";
             toreturn=cell;
             break;
         }

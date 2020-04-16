@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>de</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleDocumentTypes</key>
@@ -56,7 +56,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>Fabric</key>
+	<!--<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
 		<string>6e807cf86986312a050437809e762656b44b197c</string>
@@ -69,7 +69,7 @@
 				<string>Crashlytics</string>
 			</dict>
 		</array>
-	</dict>
+	</dict>-->
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -86,15 +86,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Monal allows users to take photos and upload to a conversation</string>
+	<string>Kurswahl online Messenger erlaubt es, Fotos aufzunehmen und in einer Unterhaltung zu teilen.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Monal allows you to share your location in chat if you want to</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Monal uses the microphone to transmit your voice in audio calls.</string>
+	<string>Kurswahl online Messenger benutzt das Mikrofon für Audio-/Video-Anrufe.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Monal allows users to save photos received in conversations.</string>
+	<string>Kurswahl online Messenger erlaubt es, empfangene Fotos aus einer Unterhaltung zu speichern.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Monal allows users to upload photos to recipients in a conversation</string>
+	<string>Kurswahl online Messenger erlaubt es, Bilder aus der Gallerie zu versenden</string>
 	<key>SBUsesNetwork</key>
 	<true/>
 	<key>UIBackgroundModes</key>

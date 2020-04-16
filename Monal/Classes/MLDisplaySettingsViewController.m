@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.title=NSLocalizedString(@"Display Settings",@"");
+    self.navigationItem.title=NSLocalizedString(@"Status und Anzeigeeinstellungen",@"");
    
     _settingsTable=self.tableView;
     _settingsTable.delegate=self;
@@ -69,7 +69,7 @@
 #pragma mark tableview datasource delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 
@@ -106,15 +106,17 @@
             break;
         }
             
+		/*
         case 1:
         {
             return @"Presence";
             break;
         }
+        */
             
-        case 2:
+        case 1:
         {
-            return @"General";
+            return @"Allgemein";
             break;
         }
             
@@ -146,11 +148,13 @@
             break;
         }
             
+		/*
         case 2:
         {
             return 6;
             break;
         }
+        */
             
             
         default:
@@ -174,7 +178,7 @@
             {
                 case 0:
                 {
-                    cell.textInputField.placeholder=NSLocalizedString(@"Status Message", @"");
+                    cell.textInputField.placeholder=NSLocalizedString(@"Statusnachricht", @"");
                     cell.textInputField.keyboardType=UIKeyboardTypeAlphabet;
                     cell.defaultKey=@"StatusMessage";
                     cell.textEnabled=YES;
@@ -185,6 +189,7 @@
             }
         }
    
+		/*
         case 1:
         {
             
@@ -218,18 +223,20 @@
              return cell; 
             break;
         }
+        */
     
-        case 2:
+        case 1:
         {
             switch(indexPath.row)
             {
                 case 0:
                 {
-                    cell.textLabel.text=NSLocalizedString(@"Message Preview", @"");
+                    cell.textLabel.text=NSLocalizedString(@"Nachrichtenvorschau", @"");
                     cell.defaultKey=@"MessagePreview";
                     cell.switchEnabled=YES;
                     break; 
                 }
+                /*
                 case 1:
                 {
                     cell.textLabel.text=NSLocalizedString(@"Log Chats", @"");
@@ -251,17 +258,18 @@
                     cell.switchEnabled=YES;
                     break;
                 }
-                case 4:
+                */
+                case 1:
                 {
-                    cell.textLabel.text=NSLocalizedString(@"Show Inline Images", @"");
-                    cell.detailTextLabel.text=@"Will make a HTTP HEAD call on all links";
+                    cell.textLabel.text=NSLocalizedString(@"Bilder direkt im Chat anzeigen", @"");
+                    cell.detailTextLabel.text=@"";
                     cell.defaultKey=@"ShowImages";
                     cell.switchEnabled=YES;
                     break;
                 }
-                case 5:
+                case 2:
                 {
-                    cell.textLabel.text=NSLocalizedString(@"Show Inline Geo Location", @"");
+                    cell.textLabel.text=NSLocalizedString(@"Standorte auf Karte anzeigen", @"");
                     cell.detailTextLabel.text=@"";
                     cell.defaultKey=@"ShowGeoLocation";
                     cell.switchEnabled=YES;

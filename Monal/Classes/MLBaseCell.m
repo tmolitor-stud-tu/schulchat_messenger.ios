@@ -7,8 +7,8 @@
 //
 
 #import "MLBaseCell.h"
-NSString *const kDelivered=@"Delivered";
-NSString *const kRead=@"Read";
+NSString *const kDelivered=@"Zugestellt";
+NSString *const kRead=@"Gelesen";
 
 @implementation MLBaseCell
 

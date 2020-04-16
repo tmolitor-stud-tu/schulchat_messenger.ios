@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"Backgrounds";
+    self.title=@"Hintergrundbilder";
     
     self.imageList = @[@"Golden_leaves_by_Mauro_Campanelli",
                        @"Stop_the_light_by_Mato_Rachela",
@@ -54,12 +54,12 @@
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"Select a background to display behind conversations";
+    return @"Hintergrundbild für Chats auswählen";
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Default chat backgrounds are from the Ubuntu project." ;
+    return @"Die Standardhintergrundbilder sind aus Ubuntu." ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,14 +71,14 @@
             cell.parent= self;
             cell.switchEnabled=YES;
             cell.defaultKey=@"ChatBackgrounds";
-            cell.textLabel.text=@"Chat Backgrounds";
+            cell.textLabel.text=@"Chat Hintergrundbilder verwenden";
             toreturn=cell;
             break;
         }
             
         case 1: {
            UITableViewCell* cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SelectCell"];
-            cell.textLabel.text=@"Select Background";
+            cell.textLabel.text=@"Hintergrundbild auswählen";
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             toreturn=cell;
             break;
@@ -87,9 +87,9 @@
         case 2: {
             UITableViewCell* cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SelectCell"];
 #if TARGET_OS_MACCATALYST
-            cell.textLabel.text=@"Select File";
+            cell.textLabel.text=@"Bilddatei auswählen";
 #else
-            cell.textLabel.text=@"Select From Photos";
+            cell.textLabel.text=@"Hintergrundbild aus der Gallerie auswählen";
 #endif
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             toreturn=cell;
@@ -168,9 +168,9 @@
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:self.photos];
-    browser.navigationItem.title=@"Select a Background";
+    browser.navigationItem.title=@"Hintergrundbild auswählen";
     browser.delegate=self;
-    UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(close)];
+    UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Schließen" style:UIBarButtonItemStyleDone target:self action:@selector(close)];
     browser.navigationItem.rightBarButtonItem=close;
     
     browser.autoHideInterface=NO;

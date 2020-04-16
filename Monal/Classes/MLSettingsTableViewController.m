@@ -13,9 +13,9 @@
 NS_ENUM(NSInteger, kSettingSection)
 {
     kSettingSectionApp=0,
-    kSettingSectionSupport,
     kSettingSectionAbout,
-    kSettingSectionCount
+    kSettingSectionCount,
+    kSettingSectionSupport,
 };
 
 @interface MLSettingsTableViewController ()
@@ -37,15 +37,21 @@ NS_ENUM(NSInteger, kSettingSection)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationItem.title=NSLocalizedString(@"Einstellungen",@"");
     
-    self.sections =@[@"App", @"Support", @"About"];
+	NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+	NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
+	NSString* build = [infoDict objectForKey:@"CFBundleVersion"];
+	
+    self.sections =@[@"App", [NSString stringWithFormat:@"Kurswahl online Messenger Version %@ (%@)",version, build]];
     
-    self.appRows=@[@"Quick Setup", @"Accounts", @"Notifications", @"Backgrounds", @"Sounds", @"Display", @"Chat Logs"];  //@"Cloud Storage"
-    self.supportRows=@[@"Email Support", @"Submit A Bug"];
+    self.appRows=@[@"Status und Anzeigeeinstellungen", @"Hintergrundbilder", @"Klänge"];
+    //self.supportRows=@[@"Email Support", @"Submit A Bug"];
+	self.supportRows=@[];
 #ifdef DEBUG
-    self.aboutRows=@[@"Rate Monal", @"Open Source", @"Privacy", @"Crash Logging",  @"About", @"Version",  @"Log" ];
+    self.aboutRows=@[@"Open Source"];//, @"Log" ];
 #else
-    self.aboutRows=@[@"Rate Monal", @"Open Source", @"Privacy", @"Crash Logging", @"About", @"Version"];
+	self.aboutRows=@[@"Open Source" ];
 #endif
     self.splitViewController.preferredDisplayMode=UISplitViewControllerDisplayModeAllVisible;
     #if !TARGET_OS_MACCATALYST
@@ -110,15 +116,15 @@ NS_ENUM(NSInteger, kSettingSection)
             break;
         }
         case kSettingSectionAbout: {
-            if(indexPath.row==5)
+            /*if(indexPath.row==1)
             {
                 NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
                 NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
                 NSString* build = [infoDict objectForKey:@"CFBundleVersion"];
                 
-                cell.textLabel.text= [NSString stringWithFormat:@"Version  %@ (%@)",version, build];
+                cell.textLabel.text= [NSString stringWithFormat:@"Kurswahl online Messenger Version %@ (%@)",version, build];
                 cell.accessoryType=UITableViewCellAccessoryNone;
-            } else {
+            } else*/ {
                 cell.textLabel.text= self.aboutRows[indexPath.row];
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             }
@@ -146,6 +152,7 @@ NS_ENUM(NSInteger, kSettingSection)
         case kSettingSectionApp: {
            
             switch ((indexPath.row)) {
+				/*
                 case 0:
                     [self performSegueWithIdentifier:@"showLogin" sender:self];
                     break;
@@ -157,25 +164,28 @@ NS_ENUM(NSInteger, kSettingSection)
                 case 2:
                     [self performSegueWithIdentifier:@"showNotification" sender:self];
                     break;
+                */
                     
-                case 3:
+                case 0:
+                    [self performSegueWithIdentifier:@"showDisplay" sender:self];
+                    break;
+                case 1:
                     [self performSegueWithIdentifier:@"showBackgrounds" sender:self];
                     break;
-                case 4:
+                case 2:
                     [self performSegueWithIdentifier:@"showSounds" sender:self];
                     break;
                     
-                case 5:
-                    [self performSegueWithIdentifier:@"showDisplay" sender:self];
-                    break;
                     
-                case 6:
+                /*
+				case 4:
                     [self performSegueWithIdentifier:@"showChatLog" sender:self];
                     break;
                     
-                case 7:
+                case 5:
                     [self performSegueWithIdentifier:@"showCloud" sender:self];
                     break;
+				*/
        
                 default:
                     break;
@@ -199,14 +209,17 @@ NS_ENUM(NSInteger, kSettingSection)
         }
         case kSettingSectionAbout: {
             switch ((indexPath.row)) {
+				/*
                 case 0:
                     [self openStoreProductViewControllerWithITunesItemIdentifier:317711500];
                     break;
+				*/
                     
-                case 1:
+                case 0:
                     [self performSegueWithIdentifier:@"showOpenSource" sender:self];
                     break;
                     
+				/*
                 case 2:
                     [self openLink:@"https://monal.im/privacy-policy/"];
                     break;
@@ -217,8 +230,9 @@ NS_ENUM(NSInteger, kSettingSection)
                 case 4:
                     [self openLink:@"https://monal.im/about/"];
                     break;
+				*/
                     
-                case 6:
+                case 1:
                     [self performSegueWithIdentifier:@"showLogs" sender:self];
                     break;
                
@@ -277,7 +291,7 @@ NS_ENUM(NSInteger, kSettingSection)
     }
     else  {
         UIAlertController *messageAlert =[UIAlertController alertControllerWithTitle:@"Error" message:@"There is no configured email account. Please email info@monal.im ." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        UIAlertAction *closeAction =[UIAlertAction actionWithTitle:@"Schließen" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
         }];
         [messageAlert addAction:closeAction];
