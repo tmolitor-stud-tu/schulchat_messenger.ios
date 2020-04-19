@@ -13,12 +13,18 @@
 @import SAMKeychain;
 @import QuartzCore;
 @import SafariServices;
+@import UIKit;
 
 @interface MLLogInViewController ()
 @property (nonatomic, strong) MBProgressHUD *loginHUD;
 @property (nonatomic, weak) UITextField *activeField;
 @property (nonatomic, strong) NSString *accountno;
 
+@property (nonatomic, strong) AVCaptureDevice* device;
+@property (nonatomic, strong) AVCaptureDeviceInput* input;
+@property (nonatomic, strong) AVCaptureSession* session;
+@property (nonatomic, strong) AVCaptureMetadataOutput* output;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer* preview;
 @end
 
 @implementation MLLogInViewController
@@ -27,6 +33,8 @@
     [super viewDidLoad];
     self.topImage.layer.cornerRadius=5.0;
     self.topImage.clipsToBounds=YES;
+    
+    //[self setupScanner];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -35,6 +43,37 @@
     [nc addObserver:self selector:@selector(connected) name:kMonalAccountStatusChanged object:nil];
     [nc addObserver:self selector:@selector(error) name:kXMPPError object:nil];
     [self registerForKeyboardNotifications];
+}
+
+- (void) setupScanner
+{
+    NSError *error = nil;
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+
+    self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:&error];
+
+    self.session = [[AVCaptureSession alloc] init];
+
+    self.output = [[AVCaptureMetadataOutput alloc] init];
+    [self.session addOutput:self.output];
+    if (self.input) {
+        [self.session addInput:self.input];
+    } else {
+        NSLog(@"Error: %@", error);
+    }
+
+    [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+
+    self.preview = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
+    AVCaptureConnection *con = self.preview.connection;
+
+    con.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+
+    [self.view.layer insertSublayer:self.preview atIndex:0];
 }
 
 -(void) openLink:(NSString *) link
