@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -402,7 +402,7 @@
 		260773C3232FC4E800BFD50F /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		260773C5232FC4E800BFD50F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		260773CD232FC5DF00BFD50F /* NotificaionService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificaionService.entitlements; sourceTree = "<group>"; };
-		26080210110ABA4E005E194D /* Monal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		26080210110ABA4E005E194D /* Kurswahl online Messenger BETA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kurswahl online Messenger BETA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2609B5271FD5B26800F09FA1 /* MLSplitViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSplitViewDelegate.h; sourceTree = "<group>"; };
 		2609B5281FD5B26800F09FA1 /* MLSplitViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSplitViewDelegate.m; sourceTree = "<group>"; };
 		260C20BF21B4D02F0031399F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -889,7 +889,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				26080210110ABA4E005E194D /* Monal.app */,
+				26080210110ABA4E005E194D /* Kurswahl online Messenger BETA.app */,
 				268BCD56140B25CC0025E4D1 /* libjrtplib-static.a */,
 				2630FE2F1AD550C00079F5C0 /* Monal Tests.xctest */,
 				26AA70112146BBB800598605 /* shareSheet.appex */,
@@ -1712,7 +1712,7 @@
 			);
 			name = Monal;
 			productName = SworIM;
-			productReference = 26080210110ABA4E005E194D /* Monal.app */;
+			productReference = 26080210110ABA4E005E194D /* Kurswahl online Messenger BETA.app */;
 			productType = "com.apple.product-type.application";
 		};
 		260773BF232FC4E800BFD50F /* NotificaionService */ = {
@@ -1819,6 +1819,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = ML;
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastUpgradeCheck = 0930;
@@ -1848,12 +1849,10 @@
 					};
 					2630FE2E1AD550C00079F5C0 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 33XS7DE5NZ;
 						TestTargetID = 1D6058900D05DD3D006BFB54;
 					};
 					26AA70102146BBB800598605 = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = 33XS7DE5NZ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -2050,7 +2049,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"AppStore\" ]; then\noldBuildNumber=$(git tag --sort=\"v:refname\" |grep \"Build_iOS\" | tail -n1 | sed 's/Build_iOS_//g')\nbuildNumber=$(expr $oldBuildNumber + 1)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/Monal-Info.plist\"\nfi";
+			shellScript = "
+";
 		};
 		2665C11C1C4ABF7100CC9A04 /* Remove Build number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2064,7 +2064,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"AppStore\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion 0\" \"${PROJECT_DIR}/Monal-Info.plist\"\nfi\n\n";
+			shellScript = "
+";
 		};
 		2665C11D1C4ABFB500CC9A04 /* Tag Git */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2078,7 +2079,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"AppStore\" ]; then\noldBuildNumber=$(git tag --sort=\"v:refname\" |grep \"Build_iOS\" | tail -n1 | sed 's/Build_iOS_//g')\nbuildNumber=$(expr $oldBuildNumber + 1)\ngit tag Build_iOS_$buildNumber\ngit push origin Build_iOS_$buildNumber\nfi\n";
+			shellScript = "
+";
 		};
 		2C2F76B3D7BFA8599420658A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2446,12 +2448,11 @@
 				CODE_SIGN_ENTITLEMENTS = Monal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2469,7 +2470,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Monal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2479,15 +2480,15 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-macos",
 				);
 				LLVM_LTO = NO;
-				MARKETING_VERSION = 4.6;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM;
-				PRODUCT_NAME = Monal;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta;
+				PRODUCT_NAME = "Kurswahl online Messenger BETA";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Debug;
 		};
@@ -2513,7 +2514,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2535,11 +2536,11 @@
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.NotificaionService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2585,7 +2586,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2612,14 +2613,14 @@
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.NotificaionService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2665,7 +2666,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2692,13 +2693,13 @@
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.NotificaionService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2717,6 +2718,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2767,6 +2769,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2818,6 +2821,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2870,8 +2874,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Anurodh Pokharel (33XS7DE5NZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anurodh Pokharel (33XS7DE5NZ)";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2885,7 +2889,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PROVISIONING_PROFILE = "C87D7BC2-2AC9-4ED4-945E-692EB563956A";
@@ -2906,12 +2910,11 @@
 				CODE_SIGN_ENTITLEMENTS = Monal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = NO;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2924,7 +2927,7 @@
 				GCC_PREFIX_HEADER = SworIM_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Monal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2934,15 +2937,15 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-macos",
 				);
 				LLVM_LTO = NO;
-				MARKETING_VERSION = 4.6;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM;
-				PRODUCT_NAME = Monal;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta;
+				PRODUCT_NAME = "Kurswahl online Messenger BETA";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = AppStore;
 		};
@@ -3033,7 +3036,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3053,12 +3056,12 @@
 				);
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.shareSheet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3103,7 +3106,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3124,13 +3127,13 @@
 				);
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.shareSheet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3176,7 +3179,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3197,13 +3200,13 @@
 				);
 				MARKETING_VERSION = 4.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta.shareSheet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3461,8 +3464,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Anurodh Pokharel (33XS7DE5NZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anurodh Pokharel (33XS7DE5NZ)";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3476,7 +3479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PROVISIONING_PROFILE = "85C76911-58E8-4598-8FDE-6FFEB6E3ACFB";
@@ -3495,14 +3498,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Monal.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = NO;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 33XS7DE5NZ;
+				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3515,7 +3517,7 @@
 				GCC_PREFIX_HEADER = SworIM_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Monal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3525,15 +3527,15 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-macos",
 				);
 				LLVM_LTO = NO;
-				MARKETING_VERSION = 4.6;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = G7YU7X7KRJ.SworIM;
-				PRODUCT_NAME = Monal;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.beta;
+				PRODUCT_NAME = "Kurswahl online Messenger BETA";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Adhoc;
 		};
@@ -3591,8 +3593,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Anurodh Pokharel (NVHUCKM9V3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anurodh Pokharel (NVHUCKM9V3)";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -3606,7 +3608,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3628,7 +3630,7 @@
 				2675EF5A18B98C2D0059C5C3 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		260773CC232FC4E800BFD50F /* Build configuration list for PBXNativeTarget "NotificaionService" */ = {
 			isa = XCConfigurationList;
@@ -3638,7 +3640,7 @@
 				260773CB232FC4E800BFD50F /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		2630FE3A1AD550C00079F5C0 /* Build configuration list for PBXNativeTarget "Monal Tests" */ = {
 			isa = XCConfigurationList;
@@ -3648,7 +3650,7 @@
 				2630FE391AD550C00079F5C0 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		268BCD57140B25CC0025E4D1 /* Build configuration list for PBXNativeTarget "jrtplib-static" */ = {
 			isa = XCConfigurationList;
@@ -3658,7 +3660,7 @@
 				2675EF5B18B98C2D0059C5C3 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		26AA70202146BBB900598605 /* Build configuration list for PBXNativeTarget "shareSheet" */ = {
 			isa = XCConfigurationList;
@@ -3668,7 +3670,7 @@
 				26AA701F2146BBB900598605 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		26CC579F23A0867400ABB92A /* Build configuration list for PBXNativeTarget "monalxmpp" */ = {
 			isa = XCConfigurationList;
@@ -3678,7 +3680,7 @@
 				26CC579E23A0867400ABB92A /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Monal" */ = {
 			isa = XCConfigurationList;
@@ -3688,7 +3690,7 @@
 				2675EF5918B98C2D0059C5C3 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Adhoc;
 		};
 /* End XCConfigurationList section */
 	};

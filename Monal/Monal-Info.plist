@@ -9,10 +9,6 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
-			</array>
 			<key>CFBundleTypeName</key>
 			<string>XMPP Message</string>
 			<key>CFBundleTypeRole</key>
@@ -56,20 +52,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<!--<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>6e807cf86986312a050437809e762656b44b197c</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>-->
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -88,7 +70,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Kurswahl online Messenger erlaubt es, Fotos aufzunehmen und in einer Unterhaltung zu teilen.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Monal allows you to share your location in chat if you want to</string>
+	<string>Zugriff auf Ihre Position erlauben</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Kurswahl online Messenger benutzt das Mikrofon für Audio-/Video-Anrufe.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -136,10 +118,6 @@
 			</array>
 			<key>UTTypeDescription</key>
 			<string>XMPP Message</string>
-			<key>UTTypeIconFiles</key>
-			<array>
-				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
-			</array>
 			<key>UTTypeIdentifier</key>
 			<string>de.kwo.messenger.beta</string>
 			<key>UTTypeTagSpecification</key>

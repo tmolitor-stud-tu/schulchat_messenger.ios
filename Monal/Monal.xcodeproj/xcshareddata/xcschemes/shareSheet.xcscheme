@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "1140"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -30,7 +30,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "Monal.app"
+               BuildableName = "Kurswahl online Messenger BETA.app"
                BlueprintName = "Monal"
                ReferencedContainer = "container:Monal.xcodeproj">
             </BuildableReference>
@@ -62,14 +62,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "Monal.app"
+            BuildableName = "Kurswahl online Messenger BETA.app"
             BlueprintName = "Monal"
             ReferencedContainer = "container:Monal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Adhoc"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "Monal.app"
+            BuildableName = "Kurswahl online Messenger BETA.app"
             BlueprintName = "Monal"
             ReferencedContainer = "container:Monal.xcodeproj">
          </BuildableReference>
@@ -90,7 +90,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Adhoc"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
