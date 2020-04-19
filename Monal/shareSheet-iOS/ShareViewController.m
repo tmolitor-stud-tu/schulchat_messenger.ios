@@ -29,11 +29,11 @@
     [super viewDidLoad];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setBackgroundColor:[UIColor monaldarkGreen]];
-    self.navigationController.navigationItem.title=@"Monal";
+    self.navigationController.navigationItem.title=@"Kurswahl online Messenger";
 }
 
 - (void)presentationAnimationDidFinish {
-    NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.monal"];
+    NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.kwo"];
     self.accounts= [groupDefaults objectForKey:@"accounts"];
     NSData *data=[groupDefaults objectForKey:@"recipients"];
     
@@ -68,7 +68,7 @@
                [payload setObject:self.account forKey:@"account"];
                [payload setObject:self.recipient forKey:@"recipient"];
                
-               NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.monal"];
+               NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.kwo"];
                NSMutableArray *outbox=[[groupDefaults objectForKey:@"outbox"] mutableCopy];
                if(!outbox) outbox =[[NSMutableArray alloc] init];
                

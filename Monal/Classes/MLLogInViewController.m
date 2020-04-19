@@ -110,7 +110,7 @@
                 if(accountid) {
                     self.accountno=[NSString stringWithFormat:@"%@",accountid];
                     [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
-                    [SAMKeychain setPassword:password forService:@"Monal" account:self.accountno];
+                    [SAMKeychain setPassword:password forService:@"KWO_Messenger" account:self.accountno];
                     [[MLXMPPManager sharedInstance] connectAccount:self.accountno];
                 }
             }];
@@ -123,8 +123,8 @@
 {
      dispatch_async(dispatch_get_main_queue(), ^{
     self.loginHUD.hidden=YES;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success!" message:@"You are set up and connected." preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Start Using Monal" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Erfolg!" message:@"Sie sind nun mit Kurswahl online verbunden." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Kurswahl online Messenger nun benutzen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
     [self presentViewController:alert animated:YES completion:nil];

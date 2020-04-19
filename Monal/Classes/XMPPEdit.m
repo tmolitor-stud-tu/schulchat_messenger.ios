@@ -96,7 +96,7 @@
             
             self.jid=[NSString stringWithFormat:@"%@@%@",[settings objectForKey:@"username"],[settings objectForKey:@"domain"]];
             
-            NSString*pass= [SAMKeychain passwordForService:@"Monal" account:[NSString stringWithFormat:@"%@",self.accountno]];
+            NSString*pass= [SAMKeychain passwordForService:@"KWO_Messenger" account:[NSString stringWithFormat:@"%@",self.accountno]];
             
             if(pass) {
                 self.password =pass;
@@ -226,7 +226,7 @@
                                     self.accountno=[NSString stringWithFormat:@"%@",accountid];
                                     self.editMode=YES;
                                     [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
-                                    [SAMKeychain setPassword:self.password forService:@"Monal" account:self.accountno];
+                                    [SAMKeychain setPassword:self.password forService:@"KWO_Messenger" account:self.accountno];
                                     if(self.enabled)
                                     {
                                         DDLogVerbose(@"calling connect... ");
@@ -242,7 +242,7 @@
                     }];
                 } else  {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                   UIAlertController* alert= [UIAlertController alertControllerWithTitle:@"Account Exists" message:@"This account already exists in Monal." preferredStyle:UIAlertControllerStyleAlert];
+                   UIAlertController* alert= [UIAlertController alertControllerWithTitle:@"Account Exists" message:@"This account already exists in Kurswahl online Messenger." preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [alert dismissViewControllerAnimated:YES completion:nil];
                     }]];
@@ -312,7 +312,7 @@
 
     UIAlertAction *yesAction =[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 
-        [SAMKeychain deletePasswordForService:@"Monal"  account:[NSString stringWithFormat:@"%@",self.accountno]];
+        [SAMKeychain deletePasswordForService:@"KWO_Messenger"  account:[NSString stringWithFormat:@"%@",self.accountno]];
         [self.db removeAccount:self.accountno];
         [[MLXMPPManager sharedInstance] disconnectAccount:self.accountno];
 

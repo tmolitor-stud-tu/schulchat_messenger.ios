@@ -207,7 +207,7 @@ NSString *const kiqErrorType = @"error";
     identityNode.element=@"identity";
     [identityNode.attributes setObject:@"client" forKey:@"category"];
     [identityNode.attributes setObject:@"phone" forKey:@"type"];
-    [identityNode.attributes setObject:[NSString stringWithFormat:@"Monal %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] forKey:@"name"];
+    [identityNode.attributes setObject:[NSString stringWithFormat:@"KWO Messenger %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]] forKey:@"name"];
     [queryNode.children addObject:identityNode];
        
     [self.children addObject:queryNode];
@@ -559,7 +559,7 @@ NSString *const kiqErrorType = @"error";
     
     MLXMLNode* name =[[MLXMLNode alloc] init];
     name.element=@"name";
-    name.data=@"Monal";
+    name.data=@"KWO Messenger";
     
 #if TARGET_OS_IPHONE
     MLXMLNode* os =[[MLXMLNode alloc] init];
@@ -573,7 +573,7 @@ NSString *const kiqErrorType = @"error";
     
     MLXMLNode* appVersion =[[MLXMLNode alloc] init];
     appVersion.element=@"version";
-    appVersion.data=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    appVersion.data=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
     [queryNode.children addObject:name];
     [queryNode.children addObject:os];

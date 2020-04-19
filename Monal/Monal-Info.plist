@@ -11,7 +11,7 @@
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array>
-				<string>/Users/anurodhp/Development/monalxmpp/Monal/Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
+				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>XMPP Message</string>
@@ -21,7 +21,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>im.monal.xmpp</string>
+				<string>de.kwo.messenger.beta</string>
 			</array>
 		</dict>
 	</array>
@@ -138,10 +138,10 @@
 			<string>XMPP Message</string>
 			<key>UTTypeIconFiles</key>
 			<array>
-				<string>/Users/anurodhp/Development/monalxmpp/Monal/Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
+				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>im.monal.xmpp</string>
+			<string>de.kwo.messenger.beta</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

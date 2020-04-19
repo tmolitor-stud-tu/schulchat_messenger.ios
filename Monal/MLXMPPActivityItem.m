@@ -29,7 +29,7 @@
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController
    dataTypeIdentifierForActivityType:(UIActivityType)activityType{
-    return @"im.monal.xmpp";
+    return @"de.kwo.messenger.beta";
 }
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController

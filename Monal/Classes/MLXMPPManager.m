@@ -293,7 +293,7 @@ An array of Dics what have timers to make sure everything was sent
     }
     DDLogVerbose(@"connecting account %@@%@",[account objectForKey:kUsername], [account objectForKey:kDomain]);
 
-    NSString *password = [SAMKeychain passwordForService:@"Monal" account:[NSString stringWithFormat:@"%@",[account objectForKey:kAccountID]]];
+    NSString *password = [SAMKeychain passwordForService:@"KWO_Messenger" account:[NSString stringWithFormat:@"%@",[account objectForKey:kAccountID]]];
     MLXMPPIdentity *identity = [[MLXMPPIdentity alloc] initWithJid:[NSString stringWithFormat:@"%@@%@",[account objectForKey:kUsername],[account objectForKey:kDomain] ] password:password andResource:[account objectForKey:kResource]];
 
     MLXMPPServer *server = [[MLXMPPServer alloc] initWithHost:[account objectForKey:kServer] andPort:[account objectForKey:kPort] andDirectTLS:[[account objectForKey:kDirectTLS] boolValue]];
@@ -413,7 +413,7 @@ An array of Dics what have timers to make sure everything was sent
 #if TARGET_OS_IPHONE
     [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
 #endif
-     [SAMKeychain setPassword:password forService:@"Monal" account:accountNo];
+     [SAMKeychain setPassword:password forService:@"KWO_Messenger" account:accountNo];
     xmpp* xmpp =[self getConnectedAccountForID:accountNo];
     [xmpp.connectionProperties.identity updatPassword:password];
 }
@@ -881,7 +881,7 @@ withCompletionHandler:(void (^)(BOOL success, NSString *messageId)) completion
 
 
 - (void) sendOutboxForAccount:(NSString *) account{
-    NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.monal"];
+    NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.kwo"];
     NSMutableArray *outbox=[[groupDefaults objectForKey:@"outbox"] mutableCopy];
     NSMutableArray *outboxClean=[[groupDefaults objectForKey:@"outbox"] mutableCopy];
 

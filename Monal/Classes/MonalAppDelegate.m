@@ -408,7 +408,7 @@
 
 -(void)applicationWillResignActive:(UIApplication *)application
 {
-     NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.monal"];
+     NSUserDefaults *groupDefaults= [[NSUserDefaults alloc] initWithSuiteName:@"group.kwo"];
     [[DataLayer sharedInstance] activeContactsWithCompletion:^(NSMutableArray *cleanActive) {
         NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:cleanActive requiringSecureCoding:YES error:nil];
         [groupDefaults setObject:archive forKey:@"recipients"];
