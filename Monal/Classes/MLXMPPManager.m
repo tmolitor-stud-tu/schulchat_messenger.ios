@@ -856,9 +856,17 @@ withCompletionHandler:(void (^)(BOOL success, NSString *messageId)) completion
 -(void) setPushNode:(NSString *)node andSecret:(NSString *)secret
 {
     self.pushNode=node;
-    self.pushSecret=secret;
+    if(secret)
+        self.pushSecret=secret;
+    else
+        self.pushSecret=[[NSUserDefaults standardUserDefaults] objectForKey:@"pushSecret"];
 
-    [[NSUserDefaults standardUserDefaults] setObject:node forKey:@"pushNode"];
+    if(!self.pushSecret)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPError object:@[self, @"Konnte Push-Benachrichtigungen nicht aktivieren"]];
+        return;
+    }
+    
     [[NSUserDefaults standardUserDefaults] setObject:secret forKey:@"pushSecret"];
 
     for(NSDictionary  *row in _connectedXMPP)

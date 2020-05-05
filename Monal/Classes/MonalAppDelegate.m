@@ -53,8 +53,9 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
     NSString *token=[MLPush stringFromToken:deviceToken];
-     [MLXMPPManager sharedInstance].hasAPNSToken=YES;
+    [MLXMPPManager sharedInstance].hasAPNSToken=YES;
     DDLogInfo(@"APNS token string: %@", token);
+
     [[[MLPush alloc] init] postToPushServer:token];
 }
 
@@ -62,56 +63,6 @@
     DDLogError(@"push reg error %@", error);
     
 }
-
-#pragma mark - VOIP notification
-#if !TARGET_OS_MACCATALYST
--(void) voipRegistration
-{
-    DDLogInfo(@"registering for voip APNS...");
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    PKPushRegistry * voipRegistry = [[PKPushRegistry alloc] initWithQueue: mainQueue];
-    voipRegistry.delegate = self;
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
-}
-
-// Handle updated APNS tokens
--(void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials: (PKPushCredentials *)credentials forType:(NSString *)type
-{
-    NSString *token=[MLPush stringFromToken:credentials.token];
-     [MLXMPPManager sharedInstance].hasAPNSToken=YES;
-    DDLogInfo(@"APNS voip token string: %@", token);
-    [[[MLPush alloc] init] postToPushServer:token];
-}
-
--(void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type
-{
-    DDLogInfo(@"didInvalidatePushTokenForType called (and ignored, TODO: disable push on server?)");
-}
-
-// Handle incoming pushes
--(void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
-{
-    DDLogInfo(@"incoming voip push notfication: %@", [payload dictionaryPayload]);
-    if([UIApplication sharedApplication].applicationState==UIApplicationStateActive) return;
-    if (@available(iOS 13.0, *)) {
-        DDLogError(@"Voip push shouldnt arrive on ios13.");
-    }
-    else  {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __block UIBackgroundTaskIdentifier tempTask= [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
-                DDLogInfo(@"voip push wake expiring");
-                [[UIApplication sharedApplication] endBackgroundTask:tempTask];
-                tempTask=UIBackgroundTaskInvalid;
-                [[MLXMPPManager sharedInstance] logoutAllKeepStreamWithCompletion:nil];
-            }];
-            
-            [[MLXMPPManager sharedInstance] connectIfNecessary];
-            DDLogInfo(@"voip push wake complete");
-        });
-    }
-}
-
-#endif
 
 #pragma mark - notification actions
 -(void) showCallScreen:(NSNotification*) userInfo
@@ -202,31 +153,7 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
     
-    //register for voip push using pushkit
-    if([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
-        // if we are launched in the background, it was from a push. dont do this again.
-        if (@available(iOS 13.0, *)) {
-            //no more voip mode after ios 13
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"HasUpgradedPushiOS13"]) {
-                MLPush *push = [[MLPush alloc] init];
-                [push unregisterVOIPPush];
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasUpgradedPushiOS13"];
-            }
-            
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-        else {
-#if !TARGET_OS_MACCATALYST
-            [self voipRegistration];
-#endif
-        }
-    }
-    else  {
-        [MLXMPPManager sharedInstance].pushNode = [[NSUserDefaults standardUserDefaults] objectForKey:@"pushNode"];
-        [MLXMPPManager sharedInstance].pushSecret=[[NSUserDefaults standardUserDefaults] objectForKey:@"pushSecret"];
-        [MLXMPPManager sharedInstance].hasAPNSToken=YES;
-        NSLog(@"push node %@", [MLXMPPManager sharedInstance].pushNode);
-    }
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     [self setUISettings];
 

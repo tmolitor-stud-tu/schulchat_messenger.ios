@@ -12,15 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLPush : NSObject
 +(NSString *) stringFromToken:(NSData *) tokenIn;
-+(NSString *) pushServer;
 
 -(void) postToPushServer:(NSString *) token;
 -(void) unregisterPush;
-
-/**
- Only for upgrade to ios 13. To be removed later
- */
--(void) unregisterVOIPPush;
 
 @end
 
