@@ -366,7 +366,6 @@
         cell.status=kStatusOnline;
     }
     */
-	cell.status=kStatusOnline;
     
     cell.accountNo=row.accountId.integerValue;
     cell.username=row.contactJid;

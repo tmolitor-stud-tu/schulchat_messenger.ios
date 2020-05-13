@@ -23,6 +23,7 @@
 
 -(void) setOrb
 {
+    /*
     switch (_status) {
         case kStatusAway:
         {
@@ -46,6 +47,7 @@
         default:
             break;
     }
+    */
 }
 
 -(void) showStatusText:(NSString *) text

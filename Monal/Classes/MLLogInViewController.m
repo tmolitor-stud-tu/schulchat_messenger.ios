@@ -34,7 +34,7 @@
     self.topImage.layer.cornerRadius=5.0;
     self.topImage.clipsToBounds=YES;
     
-    //[self setupScanner];
+    [self setupScanner];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -59,7 +59,7 @@
     if (self.input) {
         [self.session addInput:self.input];
     } else {
-        NSLog(@"Error: %@", error);
+        DDLogError(@"Error: %@", error);
     }
 
     [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
