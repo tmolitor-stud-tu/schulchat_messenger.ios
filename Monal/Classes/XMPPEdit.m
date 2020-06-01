@@ -538,7 +538,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     if(section == 0){
         return 3;
     }
@@ -659,12 +658,10 @@
             self.password = textField.text;
             break;
         }
-
         case 3: {
             self.server = textField.text;
             break;
         }
-
         case 4: {
             self.port = textField.text;
             break;
@@ -673,7 +670,6 @@
             self.resource = textField.text;
             break;
         }
-
         default:
             break;
     }
