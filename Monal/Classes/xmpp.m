@@ -1767,29 +1767,30 @@ static NSMutableArray *extracted(xmpp *object) {
 {
     if(!stanza) return;
 
-    if(self.accountState>=kStateBound && self.connectionProperties.supportsSM3 && self.unAckedStanzas)
+    if((self.accountState>=kStateBound || self.streamID) && self.connectionProperties.supportsSM3 && self.unAckedStanzas)
     {
-		//only count stanzas, not nonzas
-		if([stanza.element isEqualToString:@"iq"]
-			|| [stanza.element isEqualToString:@"message"]
-			|| [stanza.element isEqualToString:@"presence"])
-		{
-			DDLogVerbose(@"ADD UNACKED STANZA: %@: %@", self.lastOutboundStanza, stanza.XMLString);
-			NSDictionary *dic =@{kStanzaID:self.lastOutboundStanza, kStanza:stanza};
-			[self.unAckedStanzas addObject:dic];
-			//increment for next call
-			self.lastOutboundStanza=[NSNumber numberWithInteger:[self.lastOutboundStanza integerValue]+1];
+        //only count stanzas, not nonzas
+        if([stanza.element isEqualToString:@"iq"]
+            || [stanza.element isEqualToString:@"message"]
+            || [stanza.element isEqualToString:@"presence"])
+        {
+            DDLogVerbose(@"ADD UNACKED STANZA: %@: %@", self.lastOutboundStanza, stanza.XMLString);
+            NSDictionary *dic =@{kStanzaID:self.lastOutboundStanza, kStanza:stanza};
+            [self.unAckedStanzas addObject:dic];
+            //increment for next call
+            self.lastOutboundStanza=[NSNumber numberWithInteger:[self.lastOutboundStanza integerValue]+1];
 
-			//persist these changes
-			[self persistState];
-		}
+            //persist these changes
+            [self persistState];
+        }
     }
 
-    [self.sendQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
-		DDLogDebug(@"SEND: %@", stanza.XMLString);
-		[extracted(self) addObject:stanza];
-		[self writeFromQueue];  // try to send if there is space
-	}]];
+    if(self.accountState>=kStateBound)
+        [self.sendQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+            DDLogDebug(@"SEND: %@", stanza.XMLString);
+            [extracted(self) addObject:stanza];
+            [self writeFromQueue];  // try to send if there is space
+        }]];
 }
 
 #pragma mark messaging
