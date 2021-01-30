@@ -232,9 +232,13 @@
                     <connections>
                         <outlet property="contentView" destination="9KO-5L-PvL" id="QxA-3L-kwE"/>
                         <outlet property="jid" destination="ktr-DL-MYt" id="tdB-on-dSf"/>
+                        <outlet property="jidView" destination="j1s-TP-Gbh" id="tdB-on-dSg"/>
+                        <outlet property="laterButton" destination="QY7-bW-ufD" id="5vq-1I-hku"/>
                         <outlet property="loginButton" destination="Gth-vl-n15" id="5vq-1I-hkg"/>
                         <outlet property="password" destination="Qrh-pK-XJH" id="44m-vv-5Xb"/>
+                        <outlet property="passwordView" destination="UsC-wr-MFj" id="44m-vv-5Xc"/>
                         <outlet property="qrScanButton" destination="TZB-oT-VmG" id="T61-Rl-X0r"/>
+                        <outlet property="registerButton" destination="c9v-kP-ocC" id="5vq-1I-hkh"/>
                         <outlet property="scrollView" destination="uEV-8J-3dB" id="yei-N7-QKD"/>
                         <outlet property="topImage" destination="dBi-E0-U5p" id="3rc-PX-yIK"/>
                         <outlet property="view" destination="mRc-C7-WOT" id="fsO-Sp-UXQ"/>
@@ -588,6 +592,27 @@
     <resources>
         <image name="AppLogo" width="341.33334350585938" height="341.33334350585938"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

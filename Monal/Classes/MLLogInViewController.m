@@ -38,6 +38,21 @@
 -(void) viewWillAppear:(BOOL) animated
 {
     [super viewWillAppear:animated];
+    
+    //kwo changes
+    //[self.qrScanButton.layer setFrame:self.passwordView.frame];
+    //[self.qrScanButton.layer setNeedsLayout];
+#if TARGET_OS_SIMULATOR
+#else
+    self.jidView.hidden = YES;
+    self.passwordView.hidden = YES;
+    self.loginButton.hidden = YES;
+#endif
+    self.registerButton.hidden = YES;
+    self.laterButton.hidden = YES;
+    //[self.view setNeedsDisplay];
+    //[self.view setNeedsUpdateConstraints];
+    
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(connected:) name:kMLHasConnectedNotice object:nil];
     [nc addObserver:self selector:@selector(catchedup:) name:kMonalFinishedCatchup object:nil];
