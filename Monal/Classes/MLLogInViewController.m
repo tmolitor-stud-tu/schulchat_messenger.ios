@@ -38,6 +38,15 @@
 {
     [super viewWillAppear:animated];
     
+    [self.qrScanButton.layer setFrame:self.passwordView.frame];
+    self.jidView.hidden = YES;
+    self.passwordView.hidden = YES;
+    self.loginButton.hidden = YES;
+    self.registerButton.hidden = YES;
+    self.laterButton.hidden = YES;
+    [self.view setNeedsDisplay];
+    [self.view setNeedsUpdateConstraints];
+    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(connected:) name:kMonalFinishedCatchup object:nil];
 #ifndef DISABLE_OMEMO
