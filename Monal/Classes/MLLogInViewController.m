@@ -190,6 +190,8 @@
     {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kMonalUpdateBundleFetchStatus object:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
+            // Close QR-Code scanner
+            [self.navigationController popViewControllerAnimated:YES];
             self.loginHUD.hidden = YES;
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"You are set up and connected.", @"") preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start Using Monal", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -340,8 +342,7 @@
     // Insert jid and password into text fields
     self.jid.text = jid;
     self.password.text = password;
-    // Close QR-Code scanner
-    [self.navigationController popViewControllerAnimated:YES];
+    [self login];
 }
 
 

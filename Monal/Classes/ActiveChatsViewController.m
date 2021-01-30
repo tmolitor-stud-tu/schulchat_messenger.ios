@@ -352,6 +352,7 @@ static NSMutableSet* _smacksWarningDisplayed;
 
 -(void) segueToIntroScreensIfNeeded
 {
+    /*
     if(![[HelperTools defaultsDB] boolForKey:@"HasSeenIntro"]) {
         [self performSegueWithIdentifier:@"showIntro" sender:self];
         return;
@@ -363,8 +364,13 @@ static NSMutableSet* _smacksWarningDisplayed;
     }
     if(![[HelperTools defaultsDB] boolForKey:@"HasSeenPrivacySettings"]) {
         [self performSegueWithIdentifier:@"showPrivacySettings" sender:self];
-        return;
-    }
+    */
+    
+    //KWO show setup if no account is configured
+    if([[[DataLayer sharedInstance] enabledAccountCnts] intValue] == 0)
+        [self performSegueWithIdentifier:@"showLogin" sender:self];
+    else if(![[HelperTools defaultsDB] boolForKey:@"HasSeenPrivacySettings"])
+        [self performSegueWithIdentifier:@"showPrivacySettings" sender:self];
 }
 
 -(void) didReceiveMemoryWarning
