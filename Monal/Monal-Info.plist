@@ -9,13 +9,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>KWO Messenger</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array>
-				<string>/Users/anurodhp/Development/monalxmpp/Monal/Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
+				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>XMPP Message</string>
@@ -25,7 +25,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>im.monal.xmpp</string>
+				<string>de.kwo.messenger</string>
 			</array>
 		</dict>
 	</array>
@@ -80,17 +80,17 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Monal allows users to take photos and upload to a conversation</string>
+	<string>KWO Messenger allows users to take photos and upload to a conversation</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Monal  uses your location when you send a location message in a conversation.</string>
+	<string>KWO MEssenger uses your location when you send a location message in a conversation.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Monal  uses your location when you send a location message in a conversation.</string>
+	<string>KWO Messenger uses your location when you send a location message in a conversation.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Monal uses the microphone to transmit your voice in audio calls.</string>
+	<string>KWO Messenger uses the microphone to transmit your voice in audio calls.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Monal allows users to save photos received in conversations.</string>
+	<string>KWO Messenger allows users to save photos received in conversations.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Monal allows users to upload photos to recipients in a conversation</string>
+	<string>KWO Messenger allows users to upload photos to recipients in a conversation</string>
 	<key>SBUsesNetwork</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -132,13 +132,13 @@
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>XMPP Message</string>
+			<string>KWO Message</string>
 			<key>UTTypeIconFiles</key>
 			<array>
-				<string>/Users/anurodhp/Development/monalxmpp/Monal/Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
+				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>im.monal.xmpp</string>
+			<string>de.kwo.messenger</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

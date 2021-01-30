@@ -8,7 +8,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.monal</string>
+		<string>group.kwo.messenger</string>
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>
@@ -16,7 +16,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)G7YU7X7KRJ.SworIM</string>
+		<string>$(AppIdentifierPrefix)de.kwo.messenger</string>
 	</array>
 </dict>
 </plist>
