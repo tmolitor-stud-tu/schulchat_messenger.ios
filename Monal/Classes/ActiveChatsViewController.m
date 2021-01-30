@@ -259,17 +259,12 @@ enum activeChatsControllerSections {
 -(void) viewDidAppear:(BOOL) animated
 {
     [super viewDidAppear:animated];
-    if(![[HelperTools defaultsDB] boolForKey:@"HasSeenIntro"]) {
-        [self performSegueWithIdentifier:@"showIntro" sender:self];
-        return;
-    }
-    if(![[HelperTools defaultsDB] boolForKey:@"HasSeenLogin"]) {
+    
+    //KWO show setup if no account is configured
+    if([[[DataLayer sharedInstance] enabledAccountCnts] intValue] == 0)
         [self performSegueWithIdentifier:@"showLogin" sender:self];
-    }
-    if(![[HelperTools defaultsDB] boolForKey:@"HasSeenPrivacySettings"]) {
+    else if(![[HelperTools defaultsDB] boolForKey:@"HasSeenPrivacySettings"])
         [self performSegueWithIdentifier:@"showPrivacySettings" sender:self];
-        return;
-    }
 }
 
 -(void) didReceiveMemoryWarning
