@@ -34,6 +34,17 @@ struct XMPPLoginQRCode : Codable
     }
 }
 
+extension URL {
+    public var queryParameters: [String: String]? {
+        guard
+            let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
+            let queryItems = components.queryItems else { return nil }
+        return queryItems.reduce(into: [String: String]()) { (result, item) in
+            result[item.name] = item.value
+        }
+    }
+}
+
 @available(macCatalyst 14.0, *)
 @available(iOS 14.0, *)
 @objc class MLQRCodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
@@ -181,6 +192,7 @@ struct XMPPLoginQRCode : Codable
             }
             else
             {
+                /*
                 // check if we have a json object
                 // https://github.com/iNPUTmice/Conversations/issues/3796
                 guard let qrCodeData = qrCodeAsString.data(using: .utf8)
@@ -200,6 +212,19 @@ struct XMPPLoginQRCode : Codable
                     handleQRCodeError()
                     return
                 }
+                */
+                //KWO handle kwo login qrcodes
+                // example: domain=abc.kurswahl-online.de&user=uuid&token=xxxyyyzzz
+				let urlString = "https://example.org/?\(qrCodeAsString)"
+				guard let url = URL(string: urlString) else { return handleQRCodeError() }
+				guard let parameters = url.queryParameters else { return handleQRCodeError() }
+				guard let user = parameters["user"] else { return  handleQRCodeError() }
+				guard let domain = parameters["domain"] else { return handleQRCodeError() }
+				guard let token = parameters["token"] else { return handleQRCodeError() }
+				let loginData = XMPPLoginQRCode(usedProtocol: "xmpp", address: "\(user)@\(domain)", password: token)
+				print(loginData)
+				handleOmemoAccountLogin(loginData: loginData)
+				return
             }
         }
     }
