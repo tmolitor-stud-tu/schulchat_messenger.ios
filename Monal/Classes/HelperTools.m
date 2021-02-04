@@ -56,10 +56,7 @@ void logException(NSException* exception)
 
 +(NSDictionary*) pushServer
 {
-    return @{
-        @"jid": @"ios13push.monal.im",
-        @"url": @"https://ios13push.monal.im:5281/push_appserver",
-    };
+    return @{@"jid": @"push.kurswahl-online.de"};
 }
 
 +(NSString*) stringFromToken:(NSData*) tokenIn
