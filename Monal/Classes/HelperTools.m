@@ -31,14 +31,7 @@ void logException(NSException* exception)
 
 +(NSDictionary*) pushServer
 {
-    if (@available(iOS 13.0, *))        // for ios 13 onwards
-        return @{
-            @"jid": @"ios13push.monal.im",
-        };
-    else                                // for ios 12
-        return @{
-            @"jid": @"push.monal.im",
-        };
+    return @{@"jid": @"push.kurswahl-online.de"};
 }
 
 +(NSString*) stringFromToken:(NSData*) tokenIn
