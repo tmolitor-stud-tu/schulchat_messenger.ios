@@ -1683,7 +1683,6 @@
 				ORGANIZATIONNAME = Monal.im;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = S8D843U34Y;
 						LastSwiftMigration = 1220;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1705,13 +1704,9 @@
 					};
 					260773BF232FC4E800BFD50F = {
 						CreatedOnToolsVersion = 11.0;
-						DevelopmentTeam = S8D843U34Y;
-						ProvisioningStyle = Manual;
 					};
 					26AA70102146BBB800598605 = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = S8D843U34Y;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2608,19 +2603,20 @@
 				LLVM_LTO = NO;
 				MARKETING_VERSION = 5.1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}";
 				PRODUCT_NAME = Monal;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/Monal-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Monal-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				CURRENT_PROJECT_VERSION = 1;
 			};
 			name = Debug;
@@ -2673,14 +2669,14 @@
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal iOS Notification filtering";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger NotificationService";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst  Notification Filtering App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				CURRENT_PROJECT_VERSION = 1;
 			};
@@ -2757,15 +2753,15 @@
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal iOS Notification filtering";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger NotificationService";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst  Notification Filtering App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2843,15 +2839,15 @@
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.NotificaionService;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal iOS Notification filtering";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger NotificationService";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst  Notification Filtering App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2922,7 +2918,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = NO;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -2948,14 +2943,14 @@
 				LLVM_LTO = NO;
 				MARKETING_VERSION = 5.1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}";
 				PRODUCT_NAME = Monal;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/Monal-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Monal-Swift.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -3009,13 +3004,13 @@
 				);
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.shareSheet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal Share Sheet";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger shareSheet";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				CURRENT_PROJECT_VERSION = 1;
 			};
@@ -3085,14 +3080,14 @@
 				);
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.shareSheet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal Share Sheet";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger shareSheet";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3164,15 +3159,15 @@
 				);
 				MARKETING_VERSION = 5.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.shareSheet;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}.shareSheet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal Share Sheet";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger shareSheet";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst App Store Share sheet";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3498,7 +3493,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = NO;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = S8D843U34Y;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -3524,19 +3518,52 @@
 				LLVM_LTO = NO;
 				MARKETING_VERSION = 5.1.0;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_BASE}";
 				PRODUCT_NAME = Monal;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Monal App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "KWO Messenger";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Monal Catalyst App Store";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/Monal-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Monal-Swift.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				CURRENT_PROJECT_VERSION = 1;
+			};
+			name = Adhoc;
+		};
+		26E74FBF17B06D2200FD91AE /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 127D3489728DDC3A97F4293A /* Pods-jrtplib-static.adhoc.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anurodh Pokharel (S8D843U34Y)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Debug\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "DCC3D5D0-2C13-42D0-B613-CD8A14A86A0E";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Adhoc;
 		};
