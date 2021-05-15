@@ -778,8 +778,11 @@ $$
 
 +(void) updateBookmarksForAccount:(xmpp*) account
 {
+    //kwo changes: do nothing
+    /*
     DDLogVerbose(@"Updating bookmarks on account %@", account.connectionProperties.identity.jid);
     [account.pubsub fetchNode:@"storage:bookmarks" from:account.connectionProperties.identity.jid withItemsList:nil andHandler:$newHandler(MLPubSubProcessor, handleBookarksFetchResult)];
+    */
 }
 
 +(BOOL) checkIfStillBookmarked:(NSString*) room onAccount:(xmpp*) account
