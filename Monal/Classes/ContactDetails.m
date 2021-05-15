@@ -42,6 +42,26 @@ enum ContactDetailsSections {
     ContactDetailsSectionsCnt
 };
 
+//kwo changes
+enum ContactDetailsConnDetailsRows {
+    BlockStateRow,
+    PinStateRow,
+    ContactDetailsConnDetailsRowsCnt
+};
+enum ContactDetailsAboutRows {
+    ReceivedImagesRow,
+    ContactDetailsAboutRowsCnt
+};
+enum RemovedRows {
+    BeginRemovedRows = 100,
+    NicknameRow,
+    GroupSubjectRow,
+    KeysRow,
+    ResourcesRow,
+    SubscribedStateRow,
+    OMEMOClearSessionRow,
+};
+/*
 enum ContactDetailsConnDetailsRows {
     KeysRow,
     ResourcesRow,
@@ -58,6 +78,7 @@ enum ContactDetailsAboutRows {
     ReceivedImagesRow,
     ContactDetailsAboutRowsCnt
 };
+*/
 
 @implementation ContactDetails
 
@@ -193,6 +214,7 @@ enum ContactDetailsAboutRows {
             {
                 [cell initTextCell:[self.contact contactDisplayName] andPlaceholder:NSLocalizedString(@"Set a nickname for this contact", @"") andDelegate:self];
             }
+            
             return cell;
         }
         else if(indexPath.row == GroupSubjectRow)
@@ -549,6 +571,8 @@ enum ContactDetailsAboutRows {
 
 -(void) refreshContact:(NSNotification*) notification
 {
+    //kwo changes
+    /*
     MLContact* contactUpdate = notification.userInfo[@"contact"];
     if(contactUpdate && [contactUpdate isEqualToContact:self.contact])
     {
@@ -562,6 +586,7 @@ enum ContactDetailsAboutRows {
             self.saveHUD.hidden = YES;
         });
     }
+    */
 }
 
 -(void) refreshBlockState:(NSNotification*) notification
