@@ -83,13 +83,6 @@
                                                                     <action selector="muteContact:" destination="S9G-MN-HIG" eventType="touchUpInside" id="dzy-vN-Ayl"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wab-aR-CcG">
-                                                                <rect key="frame" x="105" y="8" width="21" height="29"/>
-                                                                <state key="normal" image="745-unlocked"/>
-                                                                <connections>
-                                                                    <action selector="toggleEncryption:" destination="S9G-MN-HIG" eventType="touchUpInside" id="QqE-YL-Ipn"/>
-                                                                </connections>
-                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
