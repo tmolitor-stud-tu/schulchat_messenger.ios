@@ -247,10 +247,14 @@
 
 -(BOOL) tableView:(UITableView*) tableView canEditRowAtIndexPath:(NSIndexPath*) indexPath
 {
+    //kwo changes
+    return NO;
+    /*
     if(tableView == self.view)
         return YES;
     else
         return NO;
+    */
 }
 
 -(BOOL) tableView:(UITableView*) tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath*) indexPath
