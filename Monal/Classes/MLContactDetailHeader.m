@@ -43,7 +43,11 @@
 
 -(void) loadContentForContact:(MLContact*) contact
 {
+    //kwo changes
+    self.jid.text = contact.contactDisplayName;
+    /*
     self.jid.text = contact.contactJid;
+    */
 
     // Set human readable lastInteraction field
     NSDate* lastInteractionDate = [[DataLayer sharedInstance] lastInteractionOfJid:contact.contactJid forAccountNo:contact.accountId];
