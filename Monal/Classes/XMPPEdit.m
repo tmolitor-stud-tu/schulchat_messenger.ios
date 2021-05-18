@@ -126,6 +126,12 @@
             NSLocalizedString(@"Advanced Settings", @""),
             @""
         ];
+        
+        //kwo changes
+        self.sectionArray = @[
+            @"",
+            NSLocalizedString(@"Account", @""),
+        ];
     }
     else
     {
@@ -420,6 +426,26 @@
     MLSwitchCell* thecell = (MLSwitchCell *)[tableView dequeueReusableCellWithIdentifier:@"AccountCell"];
     [thecell clear];
 
+    //kwo changes
+    if(indexPath.section == 1)
+    {
+        switch (indexPath.row)
+        {
+            case 0: {
+                [thecell initCell:NSLocalizedString(@"Status Message", @"") withTextField:self.statusMessage andPlaceholder:NSLocalizedString(@"Your status", @"") andTag:6];
+                break;
+            }
+            case 1: {
+                MLButtonCell* buttonCell = (MLButtonCell*)[tableView dequeueReusableCellWithIdentifier:@"ButtonCell"];
+                buttonCell.buttonText.text = NSLocalizedString(@"Delete Account", @"");
+                buttonCell.buttonText.textColor = [UIColor redColor];
+                buttonCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                buttonCell.tag = 1;
+                return buttonCell;
+            }
+        }
+    }
+/*
     // load cells from interface builder
     if(indexPath.section == 1)
     {
@@ -535,6 +561,7 @@
             }
         }
     }
+*/
     thecell.textInputField.delegate = self;
     if(thecell.textInputField.hidden == YES)
     {
@@ -587,6 +614,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //kwo changes
+    if(section == 0)
+        return 0;
+    else if(section == 1)
+        return 2;
+    else
+        return 0;
+    /*
     //avatar image
     if(section == 0)
         return 0;
@@ -601,6 +636,7 @@
         return 7;
     else
         return self.editMode ? 2 : 0;
+    */
 }
 
 #pragma mark -  table view delegate
@@ -608,6 +644,17 @@
 {
     DDLogVerbose(@"selected log section %ld , row %ld", newIndexPath.section, newIndexPath.row);
     
+    //kwo changes
+    if(newIndexPath.section == 1)
+    {
+        switch(newIndexPath.row)
+        {
+            case 1:
+                [self deleteAccountClicked:[tableView cellForRowAtIndexPath:newIndexPath]];
+                break;
+        }
+    }
+    /*
     if(newIndexPath.section == 2)
     {
         switch(newIndexPath.row)
@@ -649,6 +696,7 @@
                 break;
         }
     }
+    */
 
 }
 
