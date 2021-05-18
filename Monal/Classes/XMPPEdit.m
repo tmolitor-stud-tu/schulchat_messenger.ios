@@ -28,8 +28,8 @@
 enum kSettingSection {
     kSettingSectionAvatar,
     kSettingSectionAccount,
-    kSettingSectionGeneral,
-    kSettingSectionAdvanced,
+    //kSettingSectionGeneral,       //kwo changes
+    //kSettingSectionAdvanced,      //kwo changes
     kSettingSectionEdit,
     kSettingSectionCount
 };
@@ -39,10 +39,10 @@ enum kSettingsAvatarRows {
 };
 
 enum kSettingsAccountRows {
-    SettingsEnabledRow,
-    SettingsDisplayNameRow,
+    //SettingsEnabledRow,           //kwo changes
+    //SettingsDisplayNameRow,       //kwo changes
     SettingsStatusMessageRow,
-    SettingsServerDetailsRow,
+    //SettingsServerDetailsRow,     //kwo changes
     SettingsAccountRowsCnt
 };
 
@@ -67,13 +67,20 @@ enum kSettingsAdvancedRows {
 enum kSettingsEditRows {
     SettingsClearHistoryRow,
     SettingsRemoveAccountRow,
-    SettingsDeleteAccountRow,
+    //SettingsDeleteAccountRow,     //kwo changes
     SettingsEditRowsCnt
 };
 
 //this will hold all disabled rows of all enums (this is needed because the code below still references these rows)
 enum DummySettingsRows {
     DummySettingsRowsBegin = 100,
+    //kwo changes:
+    kSettingSectionGeneral,
+    kSettingSectionAdvanced,
+    SettingsEnabledRow,
+    SettingsDisplayNameRow,
+    SettingsServerDetailsRow,
+    SettingsDeleteAccountRow
 };
 
 
@@ -186,7 +193,9 @@ enum DummySettingsRows {
         }
 
         self.jid = [NSString stringWithFormat:@"%@@%@", [settings objectForKey:@"username"], [settings objectForKey:@"domain"]];
-        self.sectionDictionary[@(kSettingSectionAccount)] = [NSString stringWithFormat:NSLocalizedString(@"Account (%@)", @""), self.jid];
+        //kwo changes
+        self.sectionDictionary[@(kSettingSectionAccount)] = @"Konto";
+        //self.sectionDictionary[@(kSettingSectionAccount)] = [NSString stringWithFormat:NSLocalizedString(@"Account (%@)", @""), self.jid];
         NSString* pass = [SAMKeychain passwordForService:kMonalKeychainName account:self.accountNo.stringValue];
 
         if(pass)
@@ -206,8 +215,10 @@ enum DummySettingsRows {
         
         self.sasl2Supported = [[settings objectForKey:kSupportsSasl2] boolValue];
         
-        //overwrite account section heading in edit mode
-        self.sectionDictionary[@(kSettingSectionAccount)] = [NSString stringWithFormat:NSLocalizedString(@"Account (%@)", @""), self.jid];
+        //kwo changes
+        self.sectionDictionary[@(kSettingSectionAccount)] = @"Konto";
+//         //overwrite account section heading in edit mode
+//         self.sectionDictionary[@(kSettingSectionAccount)] = [NSString stringWithFormat:NSLocalizedString(@"Account (%@)", @""), self.jid];
     }
     else
     {
