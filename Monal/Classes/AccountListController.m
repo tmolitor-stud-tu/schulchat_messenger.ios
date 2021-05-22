@@ -79,6 +79,12 @@
     cell = [cell initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"AccountCell"];
     NSDictionary* account = [self.accountList objectAtIndex:accNo];
     NSAssert(account != nil, @"Expected non nil account in row %lu", (unsigned long)accNo);
+    //kwo changes
+    if([account[kRosterName] length] > 0)
+        cell.textLabel.text = account[kRosterName];
+    else
+        cell.textLabel.text = [[self.accountList objectAtIndex:accNo] objectForKey:@"username"];
+    /*
     if([(NSString*)[account objectForKey:@"domain"] length] > 0) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@@%@", [[self.accountList objectAtIndex:accNo] objectForKey:@"username"],
                                 [[self.accountList objectAtIndex:accNo] objectForKey:@"domain"]];
@@ -87,6 +93,7 @@
     {
         cell.textLabel.text = [[self.accountList objectAtIndex:accNo] objectForKey:@"username"];
     }
+    */
 
     UIImageView* accessory = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     cell.detailTextLabel.text = nil;
