@@ -20,14 +20,11 @@
 enum kSettingSection {
     kSettingSectionAccounts,
     kSettingSectionApp,
-    kSettingSectionSupport,
     kSettingSectionAbout,
     kSettingSectionCount
 };
 
 enum SettingsAccountRows {
-    QuickSettingsRow,
-    AdvancedSettingsRow,
     SettingsAccountRowsCnt
 };
 
@@ -48,7 +45,6 @@ enum SettingsSupportRow {
 enum SettingsAboutRows {
     RateMonalRow,
     OpenSourceRow,
-    PrivacyRow,
     AboutRow,
 #ifdef DEBUG
     LogRow,
@@ -59,8 +55,16 @@ enum SettingsAboutRows {
 };
 
 //this will hold all disabled rows of all enums (this is needed because the code below still references these rows)
+//kwo changes: added some rows here
 enum DummySettingsRows {
     DummySettingsRowsBegin = 100,
+    QuickSettingsRow,
+    AdvancedSettingsRow,
+    PrivacyRow,
+#ifndef DEBUG
+    LogRow,
+#endif
+    kSettingSectionSupport,
 };
 
 @interface MLSettingsTableViewController () {
@@ -131,7 +135,7 @@ enum DummySettingsRows {
 {
     switch(section)
     {
-        case kSettingSectionAccounts: return [self getAccountNum] + SettingsAccountRowsCnt;
+        case kSettingSectionAccounts: return [self getAccountNum] + SettingsAccountRowsCnt + ([self getAccountNum] == 0 ? 1 : 0);
         case kSettingSectionApp: return SettingsAppRowsCnt;
         case kSettingSectionSupport: return SettingsSupportRowCnt;
 #ifndef DEBUG
@@ -187,7 +191,15 @@ enum DummySettingsRows {
             }
             else
             {
-                MLAssert(indexPath.row - [self getAccountNum] < SettingsAccountRowsCnt, @"Tried to tap onto a row ment to be for a concrete account, not for quick or advanced settings");
+                NSAssert(indexPath.row - [self getAccountNum] < SettingsAccountRowsCnt + ([self getAccountNum] == 0 ? 1 : 0), @"Tried to tap onto a row ment to be for a concrete account, not for quick or advanced settings");
+                
+                //kwo change
+                if([self getAccountNum] == 0 && indexPath.row == 0)
+                {
+                    [cell initTapCell:NSLocalizedString(@"Add Account", @"")];
+                    break;
+                }
+                
                 // User selected one of the 'add account' promts
                 switch(indexPath.row - [self getAccountNum]) {
                     case QuickSettingsRow:
@@ -303,6 +315,13 @@ enum DummySettingsRows {
                 [self performSegueWithIdentifier:@"editXMPP" sender:self];
             else
             {
+                //kwo change
+                if([self getAccountNum] == 0 && indexPath.row == 0)
+                {
+                    [self performSegueWithIdentifier:@"showLogin" sender:self];
+                    break;
+                }
+                
                 switch(indexPath.row - [self getAccountNum]) {
                     case QuickSettingsRow:
                     {
@@ -358,7 +377,13 @@ enum DummySettingsRows {
         case kSettingSectionAbout: {
             switch(indexPath.row) {
                 case RateMonalRow:
-                    [self openStoreProductViewControllerWithITunesItemIdentifier:317711500];
+                    //kwo changes
+#ifdef BETA_BUILD
+                    [self openStoreProductViewControllerWithITunesItemIdentifier:1586413438];
+#else
+                    [self openStoreProductViewControllerWithITunesItemIdentifier:1508738270];
+#endif
+                    //[self openStoreProductViewControllerWithITunesItemIdentifier:317711500];
                     break;
                 case OpenSourceRow:
                     [self performSegueWithIdentifier:@"showOpenSource" sender:self];
@@ -367,7 +392,9 @@ enum DummySettingsRows {
                     [self openLink:@"https://monal-im.org/privacy"];
                     break;
                 case AboutRow:
-                    [self openLink:@"https://monal-im.org/about"];
+                    //kwo changes
+                    [self openLink:@"https://www.kurswahl-online.de/"];
+                    //[self openLink:@"https://monal-im.org/about"];
                     break;
 #ifdef DEBUG
                 case LogRow:
