@@ -62,7 +62,9 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
 
-    self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"plus"];
+    //kwo changes
+    self.navigationItem.rightBarButtonItem = nil;
+    //self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"plus"];
 }
 
 -(void) dealloc
