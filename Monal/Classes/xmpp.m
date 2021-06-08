@@ -1912,8 +1912,8 @@ NSString* const kStanza = @"stanza";
                 
                 //gather and build plaintext data string
                 NSString* deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-                //NSString* deviceName = [[UIDevice currentDevice] name];
                 NSString* deviceName = [NSString stringWithFormat:@"%@ (%@)", [[UIDevice currentDevice] name], [[UIDevice currentDevice] model]];
+                deviceName = [HelperTools hexadecimalString:[deviceName dataUsingEncoding:NSUTF8StringEncoding]];
                 NSString* versionCode = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
                 NSString* plaintextDeviceDescription = [NSString stringWithFormat:@"%@|%@|%@|%@", deviceID, deviceName, versionCode, @"ios"];
                 
