@@ -25,7 +25,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>de.kwo.messenger</string>
+				<string>${BUNDLE_BASE}</string>
 			</array>
 		</dict>
 	</array>
@@ -136,7 +136,7 @@
 				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>de.kwo.messenger</string>
+			<string>${BUNDLE_BASE}</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
