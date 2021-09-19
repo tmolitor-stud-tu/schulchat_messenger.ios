@@ -25,7 +25,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>${BUNDLE_BASE}</string>
+				<string>de.kwo.${BUNDLE_TAIL}</string>
 			</array>
 		</dict>
 	</array>
@@ -136,7 +136,7 @@
 				<string>Images.xcassets/AppIcon.appiconset/Icon-80.png</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>${BUNDLE_BASE}</string>
+			<string>de.kwo.${BUNDLE_TAIL}</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

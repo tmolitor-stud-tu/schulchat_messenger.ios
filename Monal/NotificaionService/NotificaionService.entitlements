@@ -14,7 +14,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)${BUNDLE_BASE}</string>
+		<string>$(AppIdentifierPrefix)de.kwo.${BUNDLE_TAIL}</string>
 	</array>
 </dict>
 </plist>
