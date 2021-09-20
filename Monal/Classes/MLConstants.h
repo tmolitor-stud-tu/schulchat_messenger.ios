@@ -17,8 +17,14 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 
 //configure app group constants
-#define kAppGroup @"group.kwo"
-#define kMonalKeychainName @"KWO.Messenger"
+#ifdef STABLE_BUILD
+    #define kAppGroup @"group.kwo"
+    #define kMonalKeychainName @"KWO.Messenger"
+#endif
+#ifdef BETA_BUILD
+    #define kAppGroup @"group.kwo.beta"
+    #define kMonalKeychainName @"KWO.Messenger.beta"
+#endif
 
 //this is in seconds
 #if TARGET_OS_MACCATALYST
