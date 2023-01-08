@@ -1057,6 +1057,8 @@ $$
 
 -(void) updateBookmarks
 {
+    //kwo changes: do nothing
+    /*
     DDLogVerbose(@"Updating bookmarks on account %@", _account);
     //use bookmarks2, if server supports syncing between XEP-0048 and XEP-0402 bookmarks
     //use old-style XEP-0048 bookmarks, if not
@@ -1064,6 +1066,7 @@ $$
         [_account.pubsub fetchNode:@"urn:xmpp:bookmarks:1" from:_account.connectionProperties.identity.jid withItemsList:nil andHandler:$newHandler(MLPubSubProcessor, handleBookmarks2FetchResult)];
     else
         [_account.pubsub fetchNode:@"storage:bookmarks" from:_account.connectionProperties.identity.jid withItemsList:nil andHandler:$newHandler(MLPubSubProcessor, handleBookarksFetchResult)];
+    */
 }
 
 -(BOOL) checkIfStillBookmarked:(NSString*) room
