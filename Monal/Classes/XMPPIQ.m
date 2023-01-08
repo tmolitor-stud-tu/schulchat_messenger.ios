@@ -67,6 +67,7 @@ NSString* const kiqErrorType = @"error";
         @"node": node
     } andChildren:@[
         [[XMPPDataForm alloc] initWithType:@"submit" formType:@"http://jabber.org/protocol/pubsub#publish-options" andDictionary:@{
+/*
 #ifdef IS_ALPHA
             @"pushModule": @"monalAlpha"
 #else //IS_ALPHA
@@ -76,6 +77,13 @@ NSString* const kiqErrorType = @"error";
             @"pushModule": @"monalProdiOS"
 #endif //NOT TARGET_OS_MACCATALYST
 #endif //NOT IS_ALPHA
+ */
+#ifdef STABLE_BUILD
+            @"pushModule": @"ios.stable"
+#endif
+#ifdef BETA_BUILD
+            @"pushModule": @"ios.beta"
+#endif
         }]
     ] andData:nil]];
 }

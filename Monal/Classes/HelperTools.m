@@ -139,10 +139,12 @@ void swizzle(Class c, SEL orig, SEL new)
 
 +(NSString*) getSelectedPushServerBasedOnLocale
 {
-#ifdef IS_ALPHA
-    return @"alpha.push.monal-im.org";
+/*
+ #ifdef IS_ALPHA
+    return @"fpush.kurswahl-online.de";
 #else
     return @"eu.prod.push.monal-im.org";
+ */
     /*
     if([[[NSLocale currentLocale] countryCode] isEqualToString:@"US"])
     {
@@ -153,18 +155,24 @@ void swizzle(Class c, SEL orig, SEL new)
         return @"eu.prod.push.monal-im.org";
     }
     */
-#endif
+//#endif
+    return @"fpush.kurswahl-online.de";
 }
 
 +(NSDictionary<NSString*, NSString*>*) getAvailablePushServers
 {
-    return @{
+    /*
+     return @{
         //@"us.prod.push.monal-im.org": @"US",
         @"eu.prod.push.monal-im.org": @"Europe",
         @"alpha.push.monal-im.org": @"Alpha/Debug (more Logging)",
 #ifdef IS_ALPHA
         @"disabled.push.monal-im.org": @"Disabled - Alpha Test",
 #endif
+    };
+*/
+    return @{
+        @"fpush.kurswahl-online.de": @"Push",
     };
 }
 
