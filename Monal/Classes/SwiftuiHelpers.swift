@@ -482,9 +482,9 @@ class SwiftuiInterface : NSObject {
             case "NotificationSettings":
                 host.rootView = AnyView(UIKitWorkaround(NotificationSettings(delegate:delegate)))
             case "WelcomeLogIn":
-                host.rootView = AnyView(AddTopLevelNavigation(withDelegate:delegate, to:WelcomeLogIn(delegate:delegate)))
+                host.rootView = AnyView(AddTopLevelNavigation(withDelegate:delegate, to:KWOLogin(delegate:delegate)))
             case "LogIn":
-                host.rootView = AnyView(UIKitWorkaround(WelcomeLogIn(delegate:delegate)))
+                host.rootView = AnyView(UIKitWorkaround(KWOLogin(delegate:delegate)))
             case "ContactRequests":
                 host.rootView = AnyView(AddTopLevelNavigation(withDelegate: delegate, to: ContactRequestsMenu(delegate: delegate)))
             case "ChatPlaceholder":

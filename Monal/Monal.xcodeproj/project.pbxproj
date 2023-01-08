@@ -141,6 +141,7 @@
 		844EEC6D28E718DB00CB5EF9 /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D59D9220714F32006F1DEE /* UIColor+Theme.m */; };
 		845EFFBD2918721800C1E03E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1E4654624EE517000CA5AAF /* Localizable.strings */; };
 		845EFFBE2918723D00C1E03E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1E4654624EE517000CA5AAF /* Localizable.strings */; };
+		8464DDED296AE8B80058C20F /* KWOLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464DDEC296AE8B80058C20F /* KWOLogin.swift */; };
 		846DF27C2937FAA600AAB9C0 /* ChatPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF27B2937FAA600AAB9C0 /* ChatPlaceholder.swift */; };
 		848717F3295ED64600B8D288 /* MLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 848717F1295ED64500B8D288 /* MLCall.m */; };
 		848904A9289C82C30097E19C /* SCRAM.m in Sources */ = {isa = PBXBuildFile; fileRef = 848904A8289C82C30097E19C /* SCRAM.m */; };
@@ -510,6 +511,7 @@
 		8420EA9A2915E4FE0038FF40 /* OmemoState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmemoState.h; sourceTree = "<group>"; };
 		8420EA9C2915E5100038FF40 /* OmemoState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OmemoState.m; sourceTree = "<group>"; };
 		8441EFF82921B53500E851E9 /* BackgroundSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSettings.swift; sourceTree = "<group>"; };
+		8464DDEC296AE8B80058C20F /* KWOLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWOLogin.swift; sourceTree = "<group>"; };
 		846DF27B2937FAA600AAB9C0 /* ChatPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPlaceholder.swift; sourceTree = "<group>"; };
 		848717F1295ED64500B8D288 /* MLCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLCall.m; path = Classes/MLCall.m; sourceTree = SOURCE_ROOT; };
 		848717F2295ED64500B8D288 /* MLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLCall.h; path = Classes/MLCall.h; sourceTree = SOURCE_ROOT; };
@@ -895,6 +897,7 @@
 		26715E5E17650AF900684F3D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8464DDEC296AE8B80058C20F /* KWOLogin.swift */,
 				3D65B790272350F0005A30F4 /* SwiftuiHelpers.swift */,
 				C15489B825680BBE00BBA2F0 /* MLQRCodeScanner.swift */,
 				3D7D352228626CB80042C5E5 /* LoadingOverlay.swift */,
@@ -1822,6 +1825,7 @@
 				E89DD32825C6626400925F62 /* MLFileTransferTextCell.m in Sources */,
 				261A6281176C055400059090 /* ContactsViewController.m in Sources */,
 				26B0CA8921AE2E3C0080B133 /* MLSoundsTableViewController.m in Sources */,
+				8464DDED296AE8B80058C20F /* KWOLogin.swift in Sources */,
 				84D31CE628653B83006D7926 /* WebRTCClient.swift in Sources */,
 				54F0B81C282316F5003664BD /* RegisterAccount.swift in Sources */,
 				384E4EA725F1E21A00D384A3 /* MLAutoDownloadFiletransferSettingViewController.m in Sources */,
