@@ -16,6 +16,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #import "MLLogFormatter.h"
 
 
+/*
 //configure app group constants
 #ifdef IS_ALPHA
     #define kAppGroup @"group.monalalpha"
@@ -30,6 +31,24 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #endif
 
 #define kMonalKeychainName @"Monal"
+*/
+
+//configure app group constants
+#ifdef STABLE_BUILD
+    #define kAppGroup @"group.kwo"
+    #define kMonalKeychainName @"KWO.Messenger"
+    #define kMonalOpenURL [NSURL URLWithString:@"kwoMessengerOpen://"]
+    #define kBackgroundProcessingTask @"de.kwo.messenger.process"
+    #define kBackgroundRefreshingTask @"de.kwo.messenger.refresh"
+#endif
+#ifdef BETA_BUILD
+    #define kAppGroup @"group.kwo.beta"
+    #define kMonalKeychainName @"KWO.Messenger.beta"
+    #define kMonalOpenURL [NSURL URLWithString:@"kwoMessengerOpen://"]
+    #define kBackgroundProcessingTask @"de.kwo.messenger.b.process"
+    #define kBackgroundRefreshingTask @"de.kwo.messenger.b.refresh"
+#endif
+
 
 //this is in seconds
 #if TARGET_OS_MACCATALYST
