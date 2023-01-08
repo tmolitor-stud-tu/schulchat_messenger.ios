@@ -55,12 +55,15 @@
 
 -(void) configureContactRequestsImage
 {
+    //kwo changes
+    /*
     UIImage* requestsImage = [[UIImage systemImageNamed:@"person.crop.circle.fill.badge.questionmark"] imageWithTintColor:UIColor.monalGreen];
     UITapGestureRecognizer* requestsTapRecoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openContactRequests:)];
     self.navigationItem.rightBarButtonItems[1].customView = [HelperTools
         buttonWithNotificationBadgeForImage:requestsImage
         hasNotification:[[DataLayer sharedInstance] allContactRequests].count > 0
         withTapHandler:requestsTapRecoginzer];
+    */
 }
 
 #pragma mark view life cycle
@@ -101,6 +104,9 @@
 
     self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:addContact, [[UIBarButtonItem alloc] init], nil];
     [self configureContactRequestsImage];
+    
+    //kwo changes
+    self.navigationItem.rightBarButtonItems = [NSArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactUpdate) name:kMonalContactRemoved object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactUpdate) name:kMonalContactRefresh object:nil];
