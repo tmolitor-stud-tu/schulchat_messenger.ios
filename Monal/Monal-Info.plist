@@ -4,8 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>im.monal.process</string>
-		<string>im.monal.refresh</string>
+		<string>de.kwo.messenger.process</string>
+		<string>de.kwo.messenger.refresh</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -22,7 +22,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>im.monal.xmpp</string>
+				<string>de.kwo.messenger.xmpp</string>
 			</array>
 		</dict>
 	</array>
@@ -53,7 +53,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>monalOpen</string>
+				<string>kwoMessengerOpen</string>
 			</array>
 		</dict>
 	</array>
@@ -136,7 +136,7 @@
 			<key>UTTypeDescription</key>
 			<string>XMPP Message</string>
 			<key>UTTypeIdentifier</key>
-			<string>im.monal.xmpp</string>
+			<string>de.kwo.messenger.xmpp</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

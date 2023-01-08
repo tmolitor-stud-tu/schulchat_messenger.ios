@@ -1,3 +1,6 @@
+# local secrets
+/Monal/local
+
 # macOS
 .DS_Store
 
