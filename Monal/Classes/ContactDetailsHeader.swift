@@ -27,6 +27,8 @@ struct ContactDetailsHeader: View {
                 Spacer()
             }
             
+            //kwo changes
+            /*
             Spacer()
                 .frame(height: 20)
             HStack {
@@ -46,6 +48,7 @@ struct ContactDetailsHeader: View {
             if MLXMPPManager.sharedInstance().connectedXMPP.count > 1 {
                 Text("Account: \(MLXMPPManager.sharedInstance().getConnectedAccount(forID:contact.accountId)!.connectionProperties.identity.jid)")
             }
+            */
             
             Spacer()
                 .frame(height: 20)

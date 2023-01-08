@@ -114,11 +114,14 @@ struct ContactDetails: View {
                 }
 #endif
                 
+                //kwo changes
+                /*
                 if(!contact.isGroup) {
                     TextField("Change Nickname", text: $contact.nickNameView)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .addClearButton(text:$contact.nickNameView)
                 }
+                */
                 
                 Button(contact.isPinned ? "Unpin Chat" : "Pin Chat") {
                     contact.obj.togglePinnedChat(!contact.isPinned);
@@ -141,11 +144,14 @@ struct ContactDetails: View {
                 }
 #endif
                 
+                //kwo changes
+                /*
                 if(!contact.isGroup) {
                     NavigationLink(destination: LazyClosureView(ContactResources(contact: contact))) {
                         Text("Resources")
                     }
                 }
+                */
                 
                 let sharedUrl = HelperTools.getSharedDocumentsURL(forPathComponents:[MLXMPPManager.sharedInstance().getConnectedAccount(forID:contact.accountId)!.connectionProperties.identity.jid, contact.contactDisplayName as String])
                 if UIApplication.shared.canOpenURL(sharedUrl) && FileManager.default.fileExists(atPath:sharedUrl.path) {
@@ -163,6 +169,8 @@ struct ContactDetails: View {
             .listStyle(.plain)
 
             Section { // the destructive section...
+                //kwo changes
+                /*
                 Button(action: {
                     if(!contact.isBlocked) {
                         showingBlockContactConfirmation = true
@@ -261,6 +269,7 @@ struct ContactDetails: View {
                         }
                     }
                 }
+                */
 
                 Button(action: {
                     showingClearHistoryConfirmation = true
