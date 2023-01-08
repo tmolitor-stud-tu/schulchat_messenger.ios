@@ -2702,7 +2702,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger;
 				PRODUCT_MODULE_NAME = Monal;
-				PRODUCT_NAME = Monal;
+				PRODUCT_NAME = "KWO  Messenger";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2989,7 +2989,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = de.kwo.messenger.b;
 				PRODUCT_MODULE_NAME = Monal;
-				PRODUCT_NAME = Monal;
+				PRODUCT_NAME = "KWO  Messenger B";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
