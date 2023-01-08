@@ -5,6 +5,8 @@
 //  Created by Anurodh Pokharel on 6/29/13.
 //
 //
+//KWO app secrets no published at github
+#include "../local/secrets.h"
 
 #include <os/proc.h>
 
@@ -2343,8 +2345,30 @@ NSString* const kStanza = @"stanza";
         }
         else if([parsedStanza check:@"/{urn:ietf:params:xml:ns:xmpp-sasl}challenge"])
         {
-            //we don't support any challenge-response SASL mechanism for SASL1
-            return [self invalidXMLError];
+            NSString* challenge = [[NSString alloc] initWithData:[parsedStanza findFirst:@"/#|base64"] encoding:NSUTF8StringEncoding];
+            DDLogVerbose(@"kwo challenge: %@", challenge);
+
+            //gather and build plaintext data string
+            NSString* deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            NSString* deviceName = [NSString stringWithFormat:@"%@ (%@)", [[UIDevice currentDevice] name], [[UIDevice currentDevice] model]];
+            deviceName = [HelperTools hexadecimalString:[deviceName dataUsingEncoding:NSUTF8StringEncoding]];
+            NSString* versionCode = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+            NSString* plaintextDeviceDescription = [NSString stringWithFormat:@"%@|%@|%@|%@", deviceID, deviceName, versionCode, @"ios"];
+
+            //calculate hmac signatures
+            NSString* firstHMAC = [HelperTools stringSha256HmacForKey:self.connectionProperties.identity.password andData:plaintextDeviceDescription];
+            NSString* secondHMAC = [HelperTools stringSha256HmacForKey:APP_SECRET andData:firstHMAC];
+            NSString* finalHMAC = [HelperTools stringSha256HmacForKey:challenge andData:secondHMAC];
+            DDLogVerbose(@"kwo hmac result: %@", finalHMAC);
+
+            //send response containing plaintext data and signature
+            [self send:[[MLXMLNode alloc]
+                initWithElement:@"response"
+                andNamespace:@"urn:ietf:params:xml:ns:xmpp-sasl"
+                withAttributes:@{}
+                andChildren:@[]
+                andData:[HelperTools encodeBase64WithString:[NSString stringWithFormat:@"%@|%@", plaintextDeviceDescription, finalHMAC]]
+            ]];
         }
         else if([parsedStanza check:@"/{urn:ietf:params:xml:ns:xmpp-sasl}success"])
         {
@@ -2782,7 +2806,7 @@ NSString* const kStanza = @"stanza";
         [self submitRegForm];
     }
     //prefer SASL2 over SASL1
-    else if([parsedStanza check:@"{urn:xmpp:sasl:2}authentication/mechanism"])
+    else if(/* DISABLES CODE */ (NO) && [parsedStanza check:@"{urn:xmpp:sasl:2}authentication/mechanism"])
     {
         weakify(self);
         _blockToCallOnTCPOpen = ^{
@@ -2880,7 +2904,18 @@ NSString* const kStanza = @"stanza";
         //extract menchanisms presented
         NSSet* supportedSaslMechanisms = [NSSet setWithArray:[parsedStanza find:@"{urn:ietf:params:xml:ns:xmpp-sasl}mechanisms/mechanism#"]];
         
-        if([supportedSaslMechanisms containsObject:@"PLAIN"])
+        //KWO sasl auth
+        if([supportedSaslMechanisms containsObject:@"KWO"])
+        {
+            [self send:[[MLXMLNode alloc]
+                initWithElement:@"auth"
+                andNamespace:@"urn:ietf:params:xml:ns:xmpp-sasl"
+                withAttributes:@{@"mechanism": @"KWO"}
+                andChildren:@[]
+                andData:[HelperTools encodeBase64WithString:self.connectionProperties.identity.user]
+            ]];
+        }
+        else if(/* DISABLES CODE */ (NO) && [supportedSaslMechanisms containsObject:@"PLAIN"])
         {
             [self send:[[MLXMLNode alloc]
                 initWithElement:@"auth"
@@ -3654,7 +3689,9 @@ NSString* const kStanza = @"stanza";
     
     _accountState = kStateBinding;
     XMPPIQ* iqNode = [[XMPPIQ alloc] initWithType:kiqSetType];
-    [iqNode setBindWithResource:resource];
+    //[iqNode setBindWithResource:resource];
+    //KWO: use vendor uuid as resource as required by kwo auth scheme
+    [iqNode setBindWithResource:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     [self sendIq:iqNode withHandler:$newHandler(MLIQProcessor, handleBind)];
 }
 
