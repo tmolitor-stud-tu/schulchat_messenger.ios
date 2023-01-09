@@ -78,10 +78,14 @@ struct NotificationSettings: View {
                     Section {
                         VStack(alignment: .leading) {
                             ForEach(self.xmppAccountInfo, id: \.self) { account in
-                                buildLabel(Text(account.connectionProperties.identity.jid), isWorking: account.connectionProperties.pushEnabled)
+                                //kwo changes
+                                buildLabel(Text("KWO-Server"), isWorking: account.connectionProperties.pushEnabled)
+                                //buildLabel(Text(account.connectionProperties.identity.jid), isWorking: account.connectionProperties.pushEnabled)
                                 Divider()
                             }
-                            Text("If this is off your device could not activate push on your xmpp server, make sure to have configured it to support XEP-0357.").font(.footnote)
+                            //kwo changes
+                            Text("Wenn das hier aus ist, konnte Push nicht auf dem KWO-Server aktiviert werden, bitte wende dich in diesem Fall per Mail an service@kurswahl-online.de").font(.footnote)
+                            //Text("If this is off your device could not activate push on your xmpp server, make sure to have configured it to support XEP-0357.").font(.footnote)
                         }
                     }
                 } else {
@@ -90,6 +94,8 @@ struct NotificationSettings: View {
                     }.opacity(0.5)
                 }
             }
+            //kwo changes
+            /*
             Section(header: Text("Pushserver Region").font(.title3)) {
                 Picker("Push Server", selection: $selectedPushServer) {
                     ForEach(self.availablePushServers.sorted(by: >), id: \.key) { pushServerFqdn, pushServerName in
@@ -105,6 +111,7 @@ struct NotificationSettings: View {
                     }
                 }
             }
+            */
 #if DEBUG
             Section(header: Text("Debugging").font(.title3)) {
                 Button("Reregister push token") {
