@@ -472,6 +472,16 @@ class SwiftuiInterface : NSObject {
         host.rootView = AnyView(AddTopLevelNavigation(withDelegate: delegate, to: AddContactMenu(delegate: delegate, dismissWithNewContact: dismisser, prefillJid: jid, preauthToken: preauthToken)))
         return host
     }
+    
+    //KWO: implement login via kwo-link
+    @objc
+    func makeKWOLoginView(withDomain domain:String, user:String, andPassword password:String) -> UIViewController {
+        let delegate = SheetDismisserProtocol()
+        let host = UIHostingController(rootView:AnyView(EmptyView()))
+        delegate.host = host
+        host.rootView = AnyView(AddTopLevelNavigation(withDelegate:delegate, to:KWOLogin(delegate:delegate, domain:domain, user:user, password:password)))
+        return host
+    }
 
     @objc
     func makeView(name: String) -> UIViewController {
