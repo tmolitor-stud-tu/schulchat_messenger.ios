@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) showRegisterWithUsername:(NSString*) username onHost:(NSString*) host withToken:(NSString* _Nullable) token usingCompletion:(monal_id_block_t _Nullable) callback;
 -(void) showAddContactWithJid:(NSString*) jid andPreauthToken:(NSString* _Nullable) preauthToken;
 -(void) presentCall:(MLCall*) call;
+-(void) performLoginWithDomain:(NSString*) domain user:(NSString*) user andPassword:(NSString*) password;
 
 @end
 

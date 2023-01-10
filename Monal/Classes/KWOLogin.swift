@@ -13,6 +13,9 @@ struct KWOLogin: View {
     static private let credFaultyPattern = "^.+@.+\\..{2,}$"
     
     var delegate: SheetDismisserProtocol
+    var domain: String?
+    var user: String?
+    var password: String?
     
     @State private var showAlert = false
     @State private var showQRCodeScanner = false
@@ -74,6 +77,19 @@ struct KWOLogin: View {
             }
         }
     }
+    
+    private func login(jid:String, password:String) {
+        startLoginTimeout()
+        showLoadingOverlay(overlay, headline:NSLocalizedString("Login läuft", comment: ""))
+        self.errorObserverEnabled = true
+        self.newAccountNo = MLXMPPManager.sharedInstance().login(jid, password: password)
+        if(self.newAccountNo == nil) {
+            currentTimeout = nil // <- disable timeout on error
+            errorObserverEnabled = false
+            showLoginErrorAlert(errorMessage:NSLocalizedString("Account für diese Schule konfiguriert!", comment: ""))
+            self.newAccountNo = nil
+        }
+    }
 
     var body: some View {
         ScrollView {
@@ -121,16 +137,7 @@ struct KWOLogin: View {
                         MLQRCodeScanner(
                             handleLogin: { jid, password in
                                 if !jid.isEmpty && !password.isEmpty && jid.range(of: KWOLogin.credFaultyPattern, options:.regularExpression) != nil {
-                                    startLoginTimeout()
-                                    showLoadingOverlay(overlay, headline:NSLocalizedString("Login läuft", comment: ""))
-                                    self.errorObserverEnabled = true
-                                    self.newAccountNo = MLXMPPManager.sharedInstance().login(jid, password: password)
-                                    if(self.newAccountNo == nil) {
-                                        currentTimeout = nil // <- disable timeout on error
-                                        errorObserverEnabled = false
-                                        showLoginErrorAlert(errorMessage:NSLocalizedString("Account für diese Schule konfiguriert!", comment: ""))
-                                        self.newAccountNo = nil
-                                    }
+                                    login(jid:jid, password:password)
                                 } else {
                                     showQRErrorAlert()
                                 }
@@ -167,6 +174,11 @@ struct KWOLogin: View {
                     self.delegate.dismiss()
                 }
             }))
+        }
+        .onAppear {
+            if let domain = domain, let user =  user, let password = password {
+                login(jid:"\(user)@\(domain)", password:password)
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("kXMPPError")).receive(on: RunLoop.main)) { notification in
             if(self.errorObserverEnabled == false) {

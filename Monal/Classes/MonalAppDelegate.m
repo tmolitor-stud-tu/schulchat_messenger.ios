@@ -655,6 +655,28 @@ typedef void (^pushCompletion)(UIBackgroundFetchResult result);
         [self handleXMPPURL:url];
         return YES;
     }
+    //KWO support token login urls for fast login
+    else if([url.scheme isEqualToString:@"kwologin"])      //app opened via kwo login link
+    {
+        DDLogInfo(@"Got token login url for domain %@ with user %@ and token %@...", url.host, url.user, url.password);
+        if(url.host == nil || url.user == nil || url.password == nil)
+        {
+            DDLogError(@"Login URL invalid, ignoring...");
+            return NO;
+        }
+        if([[[DataLayer sharedInstance] enabledAccountCnts] intValue] > 0)
+        {
+            DDLogWarn(@"Ignoring token login url, at least one account already configured...");
+            return NO;
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            while(self.activeChats == nil)
+                usleep(100000);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [(ActiveChatsViewController*)self.activeChats performLoginWithDomain:url.host user:url.user andPassword:url.password];
+            });
+        });
+    }
     else if([url.scheme isEqualToString:kMonalOpenURL.scheme])      //app opened via sharesheet
     {
         //make sure our outbox content is sent (if the mainapp is still connected and also was in foreground while the sharesheet was used)

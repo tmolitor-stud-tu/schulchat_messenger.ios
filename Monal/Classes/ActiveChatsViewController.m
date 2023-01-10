@@ -458,6 +458,15 @@ static NSMutableSet* _smacksWarningDisplayed;
     }
 }
 
+//KWO automatic login via link
+-(void) performLoginWithDomain:(NSString*) domain user:(NSString*) user andPassword:(NSString*) password
+{
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIViewController* loginViewController = [[SwiftuiInterface new] makeKWOLoginViewWithDomain:domain user:user andPassword:password];
+        [self presentViewController:loginViewController animated:YES completion:^{}];
+    }];
+}
+
 -(void) openConversationPlaceholder:(MLContact*) contact
 {
     // only show placeholder if we use a split view

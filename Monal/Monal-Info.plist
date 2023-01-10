@@ -54,6 +54,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kwoMessengerOpen</string>
+				<string>kwologin</string>
 			</array>
 		</dict>
 	</array>
