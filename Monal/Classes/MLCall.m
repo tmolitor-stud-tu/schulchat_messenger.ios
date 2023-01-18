@@ -26,7 +26,7 @@
 @interface MLCall() <WebRTCClientDelegate>
 {
     //these are not synthesized automatically because we have getters and setters
-    MLXMLNode* _jmiAccept;
+    MLXMLNode* _jmiProceed;
     CXAnswerCallAction* _providerAnswerAction;
     WebRTCClient* _webRTCClient;
     BOOL _muted;
@@ -39,7 +39,7 @@
 @property (nonatomic) MLCallDirection direction;
 
 @property (nonatomic, strong) MLXMLNode* _Nullable jmiPropose;
-@property (nonatomic, strong) MLXMLNode* _Nullable jmiAccept;
+@property (nonatomic, strong) MLXMLNode* _Nullable jmiProceed;
 @property (nonatomic, strong) NSString* _Nullable fullRemoteJid;
 @property (nonatomic, strong) WebRTCClient* _Nullable webRTCClient;
 @property (nonatomic, strong) CXAnswerCallAction* _Nullable providerAnswerAction;
@@ -169,9 +169,9 @@
                 return MLCallStateFinished;
             if(self.isConnected && self.webRTCClient != nil && self.audioSession != nil)
                 return MLCallStateConnected;
-            if(self.jmiAccept != nil)
+            if(self.jmiProceed != nil)
                 return MLCallStateConnecting;
-            if(self.jmiAccept == nil)
+            if(self.jmiProceed == nil)
                 return MLCallStateRinging;
             return MLCallStateIdle;
         }
@@ -192,7 +192,7 @@
 
 +(NSSet*) keyPathsForValuesAffectingState
 {
-    return [NSSet setWithObjects:@"direction", @"isConnected", @"jmiAccept", @"webRTCClient", @"providerAnswerAction", @"audioSession", @"isFinished", nil];
+    return [NSSet setWithObjects:@"direction", @"isConnected", @"jmiProceed", @"webRTCClient", @"providerAnswerAction", @"audioSession", @"isFinished", nil];
 }
 
 #pragma mark - internals
@@ -230,18 +230,18 @@
     });
 }
 
--(void) setJmiAccept:(MLXMLNode*) jmiAccept
+-(void) setJmiProceed:(MLXMLNode*) jmiProceed
 {
     @synchronized(self) {
-        _jmiAccept = jmiAccept;
+        _jmiProceed = jmiProceed;
         if(self.direction == MLCallDirectionOutgoing && self.webRTCClient != nil)
             [self establishOutgoingConnection];
     }
 }
--(MLXMLNode*) jmiAccept
+-(MLXMLNode*) jmiProceed
 {
     @synchronized(self) {
-        return _jmiAccept;
+        return _jmiProceed;
     }
 }
 
@@ -266,7 +266,7 @@
         _webRTCClient = webRTCClient;
         if(self.webRTCClient != nil && self.direction == MLCallDirectionIncoming && self.providerAnswerAction != nil)
             [self establishIncomingConnection];
-        if(self.webRTCClient != nil && self.direction == MLCallDirectionOutgoing && self.jmiAccept != nil)
+        if(self.webRTCClient != nil && self.direction == MLCallDirectionOutgoing && self.jmiProceed != nil)
             [self establishOutgoingConnection];
     }
 }
@@ -393,7 +393,7 @@
     {
         if(self.jmiPropose != nil)
         {
-            if(self.jmiAccept != nil)
+            if(self.jmiProceed != nil)
             {
                 if(wasConnected)
                 {
@@ -435,7 +435,7 @@
     DDLogInfo(@"Now connecting incoming VoIP call: %@", self);
     
     //TODO: in our non-jingle protocol we only have to accept the call via XEP-0353 and the initiator (e.g. remote) will then initialize the webrtc session via IQs
-    [self sendJmiAccept];
+    [self sendJmiProceed];
 }
 
 -(void) establishOutgoingConnection
@@ -476,7 +476,7 @@
 {
     DDLogDebug(@"Proposing new call via JMI: %@", self);
     XMPPMessage* jmiNode = [[XMPPMessage alloc] initTo:self.contact.contactJid];
-    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"propose" andNamespace:@"urn:xmpp:jingle-message:1" withAttributes:@{
+    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"propose" andNamespace:@"urn:xmpp:jingle-message:0" withAttributes:@{
         @"id": self.uuid.UUIDString,
     } andChildren:@[
         [[MLXMLNode alloc] initWithElement:@"description" andNamespace:@"urn:xmpp:jingle:apps:rtp:1" withAttributes:@{@"media": @"audio"} andChildren:@[] andData:nil]
@@ -490,7 +490,7 @@
 {
     DDLogDebug(@"Rejecting via JMI: %@", self);
     XMPPMessage* jmiNode = [[XMPPMessage alloc] initTo:self.contact.contactJid];
-    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"reject" andNamespace:@"urn:xmpp:jingle-message:1" withAttributes:@{
+    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"reject" andNamespace:@"urn:xmpp:jingle-message:0" withAttributes:@{
         @"id": self.uuid.UUIDString,
     } andChildren:@[
         [[MLXMLNode alloc] initWithElement:@"reason" andNamespace:@"urn:xmpp:jingle:1" withAttributes:@{}  andChildren:@[
@@ -501,15 +501,15 @@
     [self.account send:jmiNode];
 }
 
--(void) sendJmiAccept
+-(void) sendJmiProceed
 {
-    DDLogDebug(@"Accepting via JMI: %@", self);
+    DDLogDebug(@"Proceeding via JMI: %@", self);
     XMPPMessage* jmiNode = [[XMPPMessage alloc] initTo:self.contact.contactJid];
-    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"accept" andNamespace:@"urn:xmpp:jingle-message:1" withAttributes:@{
+    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"proceed" andNamespace:@"urn:xmpp:jingle-message:0" withAttributes:@{
         @"id": self.uuid.UUIDString,
     } andChildren:@[] andData:nil]];
     [jmiNode setStoreHint];
-    self.jmiAccept = jmiNode;
+    self.jmiProceed = jmiNode;
     [self.account send:jmiNode];
 }
 
@@ -517,7 +517,7 @@
 {
     DDLogDebug(@"Finishing via JMI: %@", self);
     XMPPMessage* jmiNode = [[XMPPMessage alloc] initTo:self.contact.contactJid];
-    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"finish" andNamespace:@"urn:xmpp:jingle-message:1" withAttributes:@{
+    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"finish" andNamespace:@"urn:xmpp:jingle-message:0" withAttributes:@{
         @"id": self.uuid.UUIDString,
     } andChildren:@[
         [[MLXMLNode alloc] initWithElement:@"reason" andNamespace:@"urn:xmpp:jingle:1" withAttributes:@{}  andChildren:@[
@@ -532,7 +532,7 @@
 {
     DDLogDebug(@"Retracting via JMI: %@", self);
     XMPPMessage* jmiNode = [[XMPPMessage alloc] initTo:self.contact.contactJid];
-    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"retract" andNamespace:@"urn:xmpp:jingle-message:1" withAttributes:@{
+    [jmiNode addChildNode:[[MLXMLNode alloc] initWithElement:@"retract" andNamespace:@"urn:xmpp:jingle-message:0" withAttributes:@{
         @"id": self.uuid.UUIDString,
     } andChildren:@[
         [[MLXMLNode alloc] initWithElement:@"reason" andNamespace:@"urn:xmpp:jingle:1" withAttributes:@{}  andChildren:@[
@@ -561,7 +561,7 @@
         @"contact": nilWrapper(self.contact),
         @"fullRemoteJid": nilWrapper(self.fullRemoteJid),
         @"jmiPropose": nilWrapper(self.jmiPropose),
-        @"jmiAccept": nilWrapper(self.jmiAccept),
+        @"jmiProceed": nilWrapper(self.jmiProceed),
         @"webRTCClient": nilWrapper(self.webRTCClient),
         @"providerAnswerAction": nilWrapper(self.providerAnswerAction),
         @"isConnected": self.isConnected ? @"YES" : @"NO",

@@ -39,7 +39,7 @@ static NSMutableDictionary* _pendingCalls;
 @property (nonatomic) MLCallDirection direction;
 
 @property (nonatomic, strong) MLXMLNode* _Nullable jmiPropose;
-@property (nonatomic, strong) MLXMLNode* _Nullable jmiAccept;
+@property (nonatomic, strong) MLXMLNode* _Nullable jmiProceed;
 @property (nonatomic, strong) NSString* _Nullable fullRemoteJid;
 @property (nonatomic, strong) WebRTCClient* _Nullable webRTCClient;
 @property (nonatomic, strong) CXAnswerCallAction* _Nullable providerAnswerAction;
@@ -217,8 +217,8 @@ static NSMutableDictionary* _pendingCalls;
     //TODO: handle jmi propose coming from other devices on our account
     XMPPMessage* messageNode =  userInfo[@"messageNode"];
     NSNumber* accountNo = userInfo[@"accountNo"];
-    NSUUID* uuid = [messageNode findFirst:@"{urn:xmpp:jingle-message:1}propose@id|uuid"];
-    MLAssert(uuid != nil, @"call uuid invalid!", (@{@"propose@id": nilWrapper([messageNode findFirst:@"{urn:xmpp:jingle-message:1}propose@id"])}));
+    NSUUID* uuid = [messageNode findFirst:@"{urn:xmpp:jingle-message:0}propose@id|uuid"];
+    MLAssert(uuid != nil, @"call uuid invalid!", (@{@"propose@id": nilWrapper([messageNode findFirst:@"{urn:xmpp:jingle-message:0}propose@id"])}));
     
     MLCall* call = [[MLCall alloc] initWithUUID:uuid contact:[MLContact createContactFromJid:messageNode.fromUser andAccountNo:accountNo] andDirection:MLCallDirectionIncoming];
     //order matters here!
@@ -256,7 +256,7 @@ static NSMutableDictionary* _pendingCalls;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 //wait for our account to connect before initializing webrtc using XEP-0215 iq stanzas
-                //if the user accepts the call before we are bound, the outgoing accept message stanza will be queued and sent once we are bound
+                //if the user accepts the call before we are bound, the outgoing proceed message stanza will be queued and sent once we are bound
                 //outgoing iq messages are not queued in all cases (e.g. non-smacks reconnect), hence this waiting loop
                 while(call.account.accountState < kStateBound)
                     [NSThread sleepForTimeInterval:0.250];
@@ -320,8 +320,8 @@ static NSMutableDictionary* _pendingCalls;
     MLAssert(messageNode != nil, @"messageNode is nil in handleIncomingJMIStanza!", notification.userInfo);
     xmpp* account = notification.object;
     MLAssert(account != nil, @"account is nil in handleIncomingJMIStanza!", notification.userInfo);
-    NSUUID* uuid = [messageNode findFirst:@"{urn:xmpp:jingle-message:1}*@id|uuid"];
-    MLAssert(uuid != nil, @"call uuid invalid!", (@{@"*@id": nilWrapper([messageNode findFirst:@"{urn:xmpp:jingle-message:1}*@id"])}));
+    NSUUID* uuid = [messageNode findFirst:@"{urn:xmpp:jingle-message:0}*@id|uuid"];
+    MLAssert(uuid != nil, @"call uuid invalid!", (@{@"*@id": nilWrapper([messageNode findFirst:@"{urn:xmpp:jingle-message:0}*@id"])}));
     MLCall* call = [self getCallForUUID:uuid];
     if(call == nil)
     {
@@ -332,16 +332,16 @@ static NSMutableDictionary* _pendingCalls;
     DDLogInfo(@"Got new incoming JMI stanza for call: %@", call);
     //TODO: handle tie breaking!
     //TODO: handle jmi stanzas coming from other devices on our account
-    if(call.direction == MLCallDirectionOutgoing && [messageNode check:@"{urn:xmpp:jingle-message:1}accept"])
+    if(call.direction == MLCallDirectionOutgoing && [messageNode check:@"{urn:xmpp:jingle-message:0}proceed"])
     {
-        if(call.jmiAccept != nil)
+        if(call.jmiProceed != nil)
         {
             //TODO: handle moving calls between own devices
-            DDLogWarn(@"Someone tried to accept an already accepted call, ignoring this jmi accept!");
+            DDLogWarn(@"Someone tried to proceed an already proceeded call, ignoring this jmi proceed!");
             return;
         }
         
-        //handle accept on other device
+        //handle proceed on other device
         if([messageNode.fromUser isEqualToString:account.connectionProperties.identity.jid])
         {
             [self.cxProvider reportCallWithUUID:call.uuid endedAtDate:nil reason:CXCallEndedReasonAnsweredElsewhere];
@@ -353,18 +353,18 @@ static NSMutableDictionary* _pendingCalls;
         
         //order matters here!
         call.fullRemoteJid = messageNode.from;
-        call.jmiAccept = messageNode;
+        call.jmiProceed = messageNode;
     }
-    else if(call.direction == MLCallDirectionOutgoing && [messageNode check:@"{urn:xmpp:jingle-message:1}reject"])
+    else if(call.direction == MLCallDirectionOutgoing && [messageNode check:@"{urn:xmpp:jingle-message:0}reject"])
     {
         if([messageNode.fromUser isEqualToString:account.connectionProperties.identity.jid])
         {
             DDLogWarn(@"Ignoring bogus jmi reject coming from other device on our account...");
             return;
         }
-        if(call.jmiAccept != nil)
+        if(call.jmiProceed != nil)
         {
-            DDLogWarn(@"Remote did try to reject already accepted call");
+            DDLogWarn(@"Remote did try to reject already proceeded call");
             [call end];
         }
         else
@@ -377,16 +377,16 @@ static NSMutableDictionary* _pendingCalls;
             [self removeCall:call];
         }
     }
-    else if(call.direction == MLCallDirectionIncoming && [messageNode check:@"{urn:xmpp:jingle-message:1}retract"])
+    else if(call.direction == MLCallDirectionIncoming && [messageNode check:@"{urn:xmpp:jingle-message:0}retract"])
     {
         if([messageNode.fromUser isEqualToString:account.connectionProperties.identity.jid])
         {
             DDLogWarn(@"Ignoring bogus jmi retract coming from other device on our account...");
             return;
         }
-        if(call.jmiAccept != nil)
+        if(call.jmiProceed != nil)
         {
-            DDLogWarn(@"Remote did try to retract already accepted call");
+            DDLogWarn(@"Remote did try to retract already proceeded call");
             [call end];
         }
         else
@@ -399,11 +399,11 @@ static NSMutableDictionary* _pendingCalls;
         }
         
     }
-    else if([messageNode check:@"{urn:xmpp:jingle-message:1}finish"])
+    else if([messageNode check:@"{urn:xmpp:jingle-message:0}finish"])
     {
-        if(call.jmiAccept != nil)
+        if(call.jmiProceed != nil)
         {
-            DDLogInfo(@"Remote finished call with reason: %@", [messageNode findFirst:@"{urn:xmpp:jingle-message:1}finish/{urn:xmpp:jingle:1}reason/*$"]);
+            DDLogInfo(@"Remote finished call with reason: %@", [messageNode findFirst:@"{urn:xmpp:jingle-message:0}finish/{urn:xmpp:jingle:1}reason/*$"]);
             [call end];
         }
         else
