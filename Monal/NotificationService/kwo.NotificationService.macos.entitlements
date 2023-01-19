@@ -14,7 +14,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)org.monal-im.prod.catalyst.monal</string>
+		<string>$(AppIdentifierPrefix)de.kwo.messenger</string>
 	</array>
 </dict>
 </plist>

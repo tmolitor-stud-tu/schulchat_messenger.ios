@@ -30,7 +30,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)KWO.Messenger</string>
+		<string>$(AppIdentifierPrefix)de.kwo.messenger</string>
 	</array>
 </dict>
 </plist>

@@ -34,6 +34,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 */
 
 //configure app group constants
+//these keychain names are NOT the same as the names used in the entitlements files!!
+//the keychain name herein is only the name of the slot used within our keychain access group
 #ifdef STABLE_BUILD
     #define kAppGroup @"group.kwo"
     #define kMonalKeychainName @"KWO.Messenger"
